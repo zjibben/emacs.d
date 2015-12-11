@@ -7,6 +7,7 @@
 ;; 
 
 ;; execute a command in a different directory
+;; inspired by http://www.emacswiki.org/emacs/CompileCommand#toc7
 (defun in-directory (&optional command dir)
   "Runs execute-extended-command with default-directory set to the given directory."
   (interactive)
