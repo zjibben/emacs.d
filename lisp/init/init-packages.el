@@ -14,6 +14,10 @@
                          ))
 (package-initialize)
 
+;; install missing packages
+(require 'init-install-packages)
+
+;; configure installed packages
 ;; AUCTeX
 (setq         TeX-auto-save   t
               TeX-parse-self  t)
