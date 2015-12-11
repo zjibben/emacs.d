@@ -38,11 +38,11 @@
 (setq exec-path (append exec-path '("/opt/cuda/bin")))
 (setenv "PATH" (concat
                 "/opt/cuda/bin:"
-                ;;"/opt/intel/composer_xe_2013_sp1.3.174/bin/intel64:"
+                "/opt/intel/composer_xe_2015.2.164/bin/intel64:"
                 (getenv "PATH") ))
 (setenv "LD_LIBRARY_PATH" (concat
                            "/opt/cuda/lib64:"
-                           ;;"/opt/intel/composer_xe_2013_sp1.3.174/compiler/lib/intel64/:"
+                           "/opt/intel/composer_xe_2015.2.164/compiler/lib/intel64/:"
                            (getenv "LD_LIBRARY_PATH") ))
 
 ;; fortran settings
