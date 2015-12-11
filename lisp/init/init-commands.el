@@ -28,7 +28,7 @@
   (shell (generate-new-buffer-name "*shell*")))
 
 ;; irc
-(require 'init-login-info)
+(require 'init-login-info nil t)
 (defun irc-snoonet ()
   "Connect to snoonet"
   (interactive)
