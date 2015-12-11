@@ -15,7 +15,7 @@
         ("http"  . ,(concat http-proxy-host ":" (number-to-string http-proxy-port)))
         ("https" . ,(concat http-proxy-host ":" (number-to-string http-proxy-port))) ))
 
-;; where did I get this?
+;; use function from http://www.emacswiki.org/emacs/ErcProxy for telling erc to use the proxy
 (defun open-http-proxy-stream (name buffer host service &rest parameters)
   "Open network stream via http proxy.
 Proxy is defined by variables http-proxy-host and http-proxy-port."
