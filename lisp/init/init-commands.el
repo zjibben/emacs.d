@@ -6,20 +6,26 @@
 ;; zjibben <threeofsix@gmail.com> 12/2015
 ;; 
 
-;; update tags using etags, including .F .f .c .C .h .H .F90 .f90 .cu .cl files (add .py?)
-;; (defun create-tags (dir-name)
-;;   "Create tags file."
-;;   (interactive "DDirectory: ")
-;;   (shell-command 
-;;    (format "find %s -type f -iname \"*.f90\" -o -iname \"*.[fch]\" -o -iname \"*.c[lu]\" \\
-;;             | etags - -o %s/TAGS" dir-name dir-name)))
-
-;; update tags using ctags
+;; update tags file 
 (defun create-tags (dir-name)
-  "Create tags file."
+  "Create tags file in specified directory, from source files in subdirectories."
   (interactive "DDirectory: ")
-  (shell-command
-   (format "ctags -f %s -e -R" (concat (directory-file-name dir-name) "/TAGS") )))
+
+  ;; remove trailing "/" if one exists, then create tags in the given directory
+  ;; (setq dir-name (directory-file-name dir-name))
+
+  (let ((dir (directory-file-name dir-name)))
+    (or
+     ;; attempt to use ctags
+     (eql (shell-command (format "ctags -f %s/TAGS -e -R" dir)) 0)
+     
+     ;; use etags, case insensitive, including .f .f90 .c .h .cu .cl files (add .py?)
+     (shell-command 
+      (format "find %s -type f -iname \"*.f90\" -o -iname \"*.[fch]\" -o -iname \"*.c[lu]\" \\
+            | etags - -o %s/TAGS" dir dir))
+     )
+    )
+  )
 
 ;; create a new shell buffer
 (defun create-shell ()
