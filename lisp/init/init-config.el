@@ -7,31 +7,33 @@
 ;; 
 
 ;; basic configuration
-(setq-default display-time-default-load-average  nil      ;; hide load average in modeline
-              display-time-day-and-date          1        ;; display both date and time
-              indent-tabs-mode                   nil      ;; spaces instead of tabs
-              calc-angle-mode                    'rad     ;; calc to radians-mode
-              calc-multiplication-has-precedence nil      ;; sensible order of operations
-              Info-fontify-maximum-menu-size     1000000  ;; increase Info highlight limit
-              shift-select-mode                  nil      ;; shift/caps won't select text
+(setq-default display-time-default-load-average  nil     ; hide load average in modeline
+              display-time-day-and-date          1       ; display both date and time
+              indent-tabs-mode                   nil     ; spaces instead of tabs
+              calc-angle-mode                    'rad    ; calc to radians-mode
+              calc-multiplication-has-precedence nil     ; sensible order of operations
+              Info-fontify-maximum-menu-size     1000000 ; increase Info highlight limit
+              shift-select-mode                  nil     ; shift/caps won't select text
               ido-everywhere                     t
               ido-enable-flex-matching           t
+              show-paren-delay                   0       ; show matching parentheses immediately
               )
-(ido-mode           1)  ;; enable ido-mode for switching buffers and finding files (replace with helm?)
-(display-time-mode  1)  ;; activate modeline time and date
-(menu-bar-mode     -1)  ;; deactivate menubar
-(tool-bar-mode     -1)  ;; deactivate toolbar
-(scroll-bar-mode   -1)  ;; deactivate scroll bar
-(show-paren-mode    1)  ;; activate matching parenthesis highlighting
+(ido-mode           1) ; enable ido-mode for switching buffers and finding files (replace with helm?)
+(display-time-mode  1) ; activate modeline time and date
+(menu-bar-mode     -1) ; deactivate menubar
+(tool-bar-mode     -1) ; deactivate toolbar
+(scroll-bar-mode   -1) ; deactivate scroll bar
+(show-paren-mode    1) ; activate matching parenthesis highlighting
 
 ;; matching parenthesis highlighting settings
-;; (setq show-paren-priority -50) ; without this matching parens aren't highlighted in region
-;; (setq show-paren-delay 0)
-;; (set-face-attribute 'show-paren-match nil :weight 'normal :foreground "lemon chiffon" :background "default")
+(set-face-attribute 'show-paren-match nil
+                    :weight     'normal
+                    :foreground "lemon chiffon"
+                    :background "default")
 
 ;; default programs
-(setq python-shell-interpreter "/usr/bin/python" ;; tell emacs where my python interpreter is
-      ;;gnuplot-program "/usr/bin/gnuplot-qt"    ;; Fedora gnuplot location
+(setq python-shell-interpreter "/usr/bin/python" ; tell emacs where my python interpreter is
+      ;;gnuplot-program "/usr/bin/gnuplot-qt"    ; Fedora gnuplot location
       )
 
 ;; update path
@@ -62,24 +64,25 @@
 (add-hook 'emacs-lisp-mode-hook 'fci-mode)
 
 ;; smooth scrolling
-(setq scroll-step                1
-      scroll-conservatively      10000
-      mouse-wheel-scroll-amount '(1 ((shift) . 1)) )
+(setq-default scroll-step                1
+              scroll-conservatively      10000
+              mouse-wheel-scroll-amount '(1 ((shift) . 1)) )
 
 ;; mode settings
 ;; is there a way to make C-e go to the actual end of the line in visual-line-mode??
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)    ;; auto spell-checking in latex
 ;;(add-hook 'LaTeX-mode-hook 'visual-line-mode) ;; break lines between words
 
-(add-hook 'org-mode-hook 'flyspell-mode)             ;; auto spell-checking in org
-(add-hook 'org-mode-hook 'visual-line-mode)          ;; break lines between words
-(add-hook 'org-mode-hook 'adaptive-wrap-prefix-mode) ;; wraped headers are indented properly
-(setq org-pretty-entities t)                         ;; render math by default
+(add-hook 'org-mode-hook 'flyspell-mode)             ; auto spell-checking in org
+(add-hook 'org-mode-hook 'visual-line-mode)          ; break lines between words
+(add-hook 'org-mode-hook 'adaptive-wrap-prefix-mode) ; wraped headers are indented properly
+(setq org-pretty-entities t)                         ; render math by default
 
 ;; set file ending defaults
-(setq auto-mode-alist (cons '("\\.\\(F90\\|fpp\\)$" . f90-mode   ) auto-mode-alist)
-      auto-mode-alist (cons '("\\.\\(cu\\|cl\\)$"   . c-mode     ) auto-mode-alist)
-      auto-mode-alist (cons '(".m$"                 . octave-mode) auto-mode-alist) )
+(add-all-to-list 'auto-mode-alist
+                 '("\\.\\(F90\\|fpp\\)$" . f90-mode   )
+                 '("\\.\\(cu\\|cl\\)$"   . c-mode     )
+                 '(".m$"                 . octave-mode))
 
 ;; email
 (setq-default user-mail-address "threeofsix@gmail.com")
@@ -94,12 +97,11 @@
 (global-set-key (kbd "<f1>") 'create-shell)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
-;; (global-set-key (kbd "M-X") 'in-directory)
-;; (global-set-key "\C-ci"  'irc)
+
+;; could make compile-in-dir shortcut a minor mode
 (add-hook 'f90-mode-hook (lambda () (local-set-key (kbd "C-c C-c") 'compile-in-dir)))
 
 ;; instead of minor mode, manually overriding for now
 (add-hook 'ibuffer-mode-hook (lambda () (local-unset-key (kbd "M-o"))))
-
 
 (provide 'init-config)

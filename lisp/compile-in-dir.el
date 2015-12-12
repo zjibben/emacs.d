@@ -19,7 +19,8 @@
     (call-interactively (or command 'execute-extended-command))))
 
 ;; compile in a directory/recompile previous compile command
-(setq compile-occurred nil)
+(defvar compile-in-dir-occurred nil
+  "Indicates to compile-in-dir whether a recompile can be performed.")
 (defun compile-in-dir (&optional force-compile)
   "Issues a compile (first time) or recompile.
    If given a non-nil argument (or prefixed with C-u), it issues a compile."
