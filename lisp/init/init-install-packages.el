@@ -30,8 +30,7 @@
                      ))
 
 ;; install all the above packages
-(dolist (package package-install-list)
-  (package-install package))
+(dolist (package package-install-list) (package-install package))
 
 ;; TODO: patch latex-pretty-symbols
 

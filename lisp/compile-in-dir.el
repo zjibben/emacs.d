@@ -27,7 +27,7 @@
   (interactive "P")
 
   ;; force a compile if we haven't compiled yet
-  (or force-compile (setq force-compile (not compile-occurred)))
+  (or force-compile (setq force-compile (not compile-in-dir-occurred)))
 
   ;; either compile or recompile
   (if force-compile
@@ -38,6 +38,6 @@
   (pop-to-buffer "*compilation*")
 
   ;; note for later that we have compiled in this session and can now recompile
-  (setq compile-occurred t))
+  (setq compile-in-dir-occurred t))
 
 (provide 'compile-in-dir)
