@@ -25,12 +25,6 @@
 (scroll-bar-mode   -1) ; deactivate scroll bar
 (show-paren-mode    1) ; activate matching parenthesis highlighting
 
-;; matching parenthesis highlighting settings
-(set-face-attribute 'show-paren-match nil
-                    :weight     'normal
-                    :foreground "lemon chiffon"
-                    :background "default")
-
 ;; default programs
 (setq python-shell-interpreter "/usr/bin/python" ; tell emacs where my python interpreter is
       ;;gnuplot-program "/usr/bin/gnuplot-qt"    ; Fedora gnuplot location

@@ -27,4 +27,10 @@
 ;; set color for highlighting current line
 ;;(custom-set-faces '(hl-line ((t (:background "gray9")))))
 
+;; matching parenthesis highlighting settings
+(set-face-attribute 'show-paren-match nil
+                    :weight     'normal
+                    :foreground "lemon chiffon"
+                    :background "default")
+
 (provide 'init-theme)
