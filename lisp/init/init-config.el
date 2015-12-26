@@ -97,6 +97,13 @@
 ;; could make compile-in-dir shortcut a minor mode
 (add-hook 'f90-mode-hook (lambda () (local-set-key (kbd "C-c C-c") 'compile-in-dir)))
 
+;; bind "make upload" to "C-c C-c" in arduino mode
+(add-hook 'arduino-mode-hook
+          (lambda () (local-set-key (kbd "C-c C-c")
+                                    (lambda () (interactive)
+                                      (compile "make upload")
+                                      (pop-to-buffer "*compilation*")))))
+
 ;; instead of minor mode, manually overriding for now
 (add-hook 'ibuffer-mode-hook (lambda () (local-unset-key (kbd "M-o"))))
 
