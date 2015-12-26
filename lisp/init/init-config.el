@@ -56,6 +56,8 @@
 (add-hook 'c++-mode-hook        'fci-mode)
 (add-hook 'python-mode-hook     'fci-mode)
 (add-hook 'emacs-lisp-mode-hook 'fci-mode)
+(add-hook 'sh-mode-hook         'fci-mode)
+(add-hook 'arduino-mode-hook    'fci-mode)
 
 ;; smooth scrolling
 (setq-default scroll-step                1
