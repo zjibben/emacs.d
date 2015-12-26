@@ -20,17 +20,16 @@
     (progn  ;; else
       (disable-theme 'ample) ;; in case it was active
       (powerline-vim-theme) ) )
-  (display-splash-screen) )
+  (display-splash-screen)
+  ;; matching parenthesis highlighting settings
+  (set-face-attribute 'show-paren-match nil
+                      :weight     'normal
+                      :foreground "lemon chiffon"
+                      :background "default") )
 (add-hook 'after-make-frame-functions 'set-theme) ;; used to have argument 1 at the end?
 (set-theme) ;; run manually for non-server/client mode
 
 ;; set color for highlighting current line
 ;;(custom-set-faces '(hl-line ((t (:background "gray9")))))
-
-;; matching parenthesis highlighting settings
-(set-face-attribute 'show-paren-match nil
-                    :weight     'normal
-                    :foreground "lemon chiffon"
-                    :background "default")
 
 (provide 'init-theme)
