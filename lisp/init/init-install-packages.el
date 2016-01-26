@@ -20,7 +20,7 @@
                      fill-column-indicator
                      gnuplot-mode
                      haskell-mode
-                     helm
+                     ;helm
                      latex-pretty-symbols
                      magit
                      multi-term

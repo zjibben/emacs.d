@@ -16,6 +16,8 @@
               shift-select-mode                  nil     ; shift/caps won't select text
               ido-everywhere                     t
               ido-enable-flex-matching           t
+              ido-ignore-extensions              t       ; ido ignores extensions like '~' and '.o'
+              completions-format                 'vertical ; sort along columns rather than rows
               show-paren-delay                   0       ; show matching parentheses immediately
               )
 (ido-mode           1) ; enable ido-mode for switching buffers and finding files (replace with helm?)
