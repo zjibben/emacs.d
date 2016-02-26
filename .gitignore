@@ -1,0 +1,11 @@
+# directories
+elpa
+eshell
+games
+semanticdb
+url
+
+# files
+*~
+session.*
+tramp
