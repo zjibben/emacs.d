@@ -6,7 +6,8 @@
 ;; zjibben <threeofsix@gmail.com> 12/2015
 ;; 
 
-;; set proxy address and port (should be set outside this package)
+;; set proxy address and port
+;; TODO: should be set outside this package
 (defvar http-proxy-host "proxyout.lanl.gov" "Host address for http proxy")
 (defvar http-proxy-port 8080                "Host port for http proxy")
 

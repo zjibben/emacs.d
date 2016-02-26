@@ -28,9 +28,10 @@
 (show-paren-mode    1) ; activate matching parenthesis highlighting
 
 ;; default programs
-(setq python-shell-interpreter "/usr/bin/python" ; tell emacs where my python interpreter is
-      ;;gnuplot-program "/usr/bin/gnuplot-qt"    ; Fedora gnuplot location
-      )
+(setq-default python-shell-interpreter "/usr/bin/ipython" ; tell emacs where my python interpreter is
+              python-shell-interpreter-args "--no-confirm-exit -i"
+              ;;gnuplot-program "/usr/bin/gnuplot-qt"    ; Fedora gnuplot location
+              )
 
 ;; update path
 (setq exec-path (append exec-path '("/opt/cuda/bin")))
@@ -93,6 +94,7 @@
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "<f1>") 'create-shell)
+(global-set-key (kbd "<f2>") 'create-python-shell)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
 

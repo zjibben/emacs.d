@@ -35,6 +35,15 @@
   (interactive)
   (shell (generate-new-buffer-name "*shell*")))
 
+;; create a new ipython shell buffer
+(defun create-python-shell ()
+  "Open a new Python shell."
+  (interactive)
+  (pop-to-buffer (process-buffer (python-shell-get-or-create-process (python-shell-parse-command))))
+  ;; rename the buffer after the fact, because Emacs's internal commands for
+  ;; making Python shells do their own manipulation on any buffer name you hand it
+  (rename-buffer (generate-new-buffer-name "*python*")))
+
 ;; irc
 (require 'init-login-info nil t) ;; attempt to grab login info
 (defun irc-snoonet ()
