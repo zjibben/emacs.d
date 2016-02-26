@@ -28,7 +28,7 @@
 (show-paren-mode    1) ; activate matching parenthesis highlighting
 
 ;; default programs
-(setq-default python-shell-interpreter "/usr/bin/ipython" ; tell emacs where my python interpreter is
+(setq-default python-shell-interpreter "ipython3"
               python-shell-interpreter-args "--no-confirm-exit -i"
               ;;gnuplot-program "/usr/bin/gnuplot-qt"    ; Fedora gnuplot location
               )

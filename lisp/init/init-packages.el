@@ -6,6 +6,9 @@
 ;; zjibben <threeofsix@gmail.com> 12/2015
 ;; 
 
+;; initialize some built-in packages
+(require 'python)
+
 ;; add repos
 (require 'package)
 (setq package-archives '(("gnu"   . "http://elpa.gnu.org/packages/")
