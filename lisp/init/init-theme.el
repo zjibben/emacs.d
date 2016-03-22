@@ -12,13 +12,14 @@
 ;; and load it every time we open a new frame
 (defun set-theme (&optional frame)
   (if frame (select-frame frame))
+  (load-theme 'ample t)
   (if (window-system frame)
       (progn  ;; then
         (if (<= (display-pixel-width) 1366) (set-frame-font "Monospace 9"))
-        (load-theme 'ample t)
         (powerline-default-theme) )
     (progn  ;; else
-      (disable-theme 'ample) ;; in case it was active
+      ;;(disable-theme 'ample) ;; in case it was active
+      (set-face-background 'default "unspecified-bg" (selected-frame)) ;; terminal sets bg color
       (powerline-vim-theme) ) )
   (display-splash-screen)
   ;; matching parenthesis highlighting settings
@@ -26,7 +27,7 @@
                       :weight     'normal
                       :foreground "lemon chiffon"
                       :background "default") )
-(add-hook 'after-make-frame-functions 'set-theme) ;; used to have argument 1 at the end?
+(add-hook 'after-make-frame-functions 'set-theme t) ;; used to have argument 1 at the end?
 (set-theme) ;; run manually for non-server/client mode
 
 ;; set color for highlighting current line
