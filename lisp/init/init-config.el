@@ -19,6 +19,8 @@
               ido-ignore-extensions              t       ; ido ignores extensions like '~' and '.o'
               completions-format                 'vertical ; sort along columns rather than rows
               show-paren-delay                   0       ; show matching parentheses immediately
+              proced-auto-update-flag            t
+              proced-auto-update-interval        2
               )
 (ido-mode           1) ; enable ido-mode for switching buffers and finding files (replace with helm?)
 (display-time-mode  1) ; activate modeline time and date
@@ -26,6 +28,7 @@
 (tool-bar-mode     -1) ; deactivate toolbar
 (scroll-bar-mode   -1) ; deactivate scroll bar
 (show-paren-mode    1) ; activate matching parenthesis highlighting
+(defalias 'yes-or-no-p 'y-or-n-p) ; I don't like typing 2 or 3 characters when I can type 1
 
 ;; default programs
 (setq-default python-shell-interpreter "ipython3"

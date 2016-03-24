@@ -27,7 +27,7 @@
                       :weight     'normal
                       :foreground "lemon chiffon"
                       :background "default") )
-(add-hook 'after-make-frame-functions 'set-theme t) ;; used to have argument 1 at the end?
+(add-hook 'after-make-frame-functions 'set-theme t) ;; append
 (set-theme) ;; run manually for non-server/client mode
 
 ;; set color for highlighting current line
