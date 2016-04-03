@@ -22,9 +22,11 @@
                      haskell-mode
                      ;helm
                      latex-pretty-symbols
+                     ;latex-preview-pane
                      magit
                      multi-term
                      org-bullets
+                     pdf-tools
                      pkgbuild-mode
                      powerline
                      ))

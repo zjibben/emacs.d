@@ -28,6 +28,8 @@
               TeX-engine     'xetex)
 (require 'latex-pretty-symbols)
 
+(pdf-tools-install)
+
 ;; multi-term
 ;; (require 'multi-term)
 ;; (setq multi-term-program "/bin/bash")

@@ -64,6 +64,10 @@
 (add-hook 'emacs-lisp-mode-hook 'fci-mode)
 (add-hook 'sh-mode-hook         'fci-mode)
 (add-hook 'arduino-mode-hook    'fci-mode)
+(add-hook 'pdf-view-mode-hook 'pdf-tools-enable-minor-modes)
+(add-hook 'pdf-view-mode-hook 'auto-revert-mode)
+(setq TeX-view-program-selection '((output-pdf "pdf-tools")))
+(setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
 
 ;; smooth scrolling
 (setq-default scroll-step                1
@@ -84,7 +88,8 @@
 (add-all-to-list 'auto-mode-alist
                  '("\\.\\(F90\\|fpp\\)$" . f90-mode   )
                  '("\\.\\(cu\\|cl\\)$"   . c-mode     )
-                 '(".m$"                 . octave-mode))
+                 '(".m$"                 . octave-mode)
+                 '(".pdf$"               . pdf-view-mode))
 
 ;; email
 (setq-default user-mail-address "threeofsix@gmail.com")
@@ -100,6 +105,7 @@
 (global-set-key (kbd "<f2>") 'create-python-shell)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; could make compile-in-dir shortcut a minor mode
 (add-hook 'f90-mode-hook (lambda () (local-set-key (kbd "C-c C-c") 'compile-in-dir)))
@@ -113,5 +119,6 @@
 
 ;; instead of minor mode, manually overriding for now
 (add-hook 'ibuffer-mode-hook (lambda () (local-unset-key (kbd "M-o"))))
+
 
 (provide 'init-config)
