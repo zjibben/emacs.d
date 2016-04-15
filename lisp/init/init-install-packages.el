@@ -17,6 +17,7 @@
                      ample-theme
                      auctex
                      djvu
+                     eimp
                      fill-column-indicator
                      gnuplot-mode
                      haskell-mode

@@ -34,6 +34,10 @@
 (setq-default plantuml-jar-path "/opt/plantuml/plantuml.jar")   ;arch
 ;(setq-default plantuml-jar-path "/usr/share/java/plantuml.jar") ;fedora
 
+;; eimp (fit images to window by default)
+(add-hook 'image-mode-hook  'eimp-mode)
+;(add-hook 'eimp-mode-hook  'eimp-fit-image-to-window)
+
 ;; multi-term
 ;; (require 'multi-term)
 ;; (setq multi-term-program "/bin/bash")
