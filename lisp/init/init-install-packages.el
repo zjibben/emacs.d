@@ -28,6 +28,7 @@
                      org-bullets
                      pdf-tools
                      pkgbuild-mode
+                     plantuml-mode
                      powerline
                      ))
 

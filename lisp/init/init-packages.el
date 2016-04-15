@@ -30,6 +30,10 @@
 
 (pdf-tools-install)
 
+;; plantuml-mode
+(setq-default plantuml-jar-path "/opt/plantuml/plantuml.jar")   ;arch
+;(setq-default plantuml-jar-path "/usr/share/java/plantuml.jar") ;fedora
+
 ;; multi-term
 ;; (require 'multi-term)
 ;; (setq multi-term-program "/bin/bash")
