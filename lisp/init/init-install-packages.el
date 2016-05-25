@@ -33,6 +33,7 @@
                      powerline
                      python-info
                      rust-mode
+                     smex
                      ;tuareg
                      ))
 

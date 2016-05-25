@@ -38,6 +38,11 @@
 (add-hook 'image-mode-hook  'eimp-mode)
 ;(add-hook 'eimp-mode-hook  'eimp-fit-image-to-window)
 
+;; smex
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
 ;; multi-term
 ;; (require 'multi-term)
 ;; (setq multi-term-program "/bin/bash")
