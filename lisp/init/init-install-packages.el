@@ -31,6 +31,9 @@
                      pkgbuild-mode
                      plantuml-mode
                      powerline
+                     python-info
+                     rust-mode
+                     ;tuareg
                      ))
 
 ;; install all the above packages
@@ -41,7 +44,6 @@
 ;; other packages worth noting:
 ;;   achievements
 ;;   almost-monokai
-;;   tuareg
 ;;   color-theme
 
 ;; other themes:
