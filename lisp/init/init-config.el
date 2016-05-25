@@ -21,7 +21,11 @@
               show-paren-delay                   0       ; show matching parentheses immediately
               proced-auto-update-flag            t
               proced-auto-update-interval        2
-              )
+
+              ;; smooth scrolling
+              scroll-step                1
+              scroll-conservatively      10000
+              mouse-wheel-scroll-amount '(1 ((shift) . 1)) )
 (ido-mode           1) ; enable ido-mode for switching buffers and finding files (replace with helm?)
 (display-time-mode  1) ; activate modeline time and date
 (menu-bar-mode     -1) ; deactivate menubar
@@ -69,11 +73,6 @@
 (setq TeX-view-program-selection '((output-pdf "pdf-tools")))
 (setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
 
-;; smooth scrolling
-(setq-default scroll-step                1
-              scroll-conservatively      10000
-              mouse-wheel-scroll-amount '(1 ((shift) . 1)) )
-
 ;; mode settings
 ;; is there a way to make C-e go to the actual end of the line in visual-line-mode??
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)    ;; auto spell-checking in latex
@@ -95,8 +94,8 @@
 (setq-default user-mail-address "threeofsix@gmail.com")
 
 ;; keybindings
-;; note: can put these all into a minor mode to group them together and deactivate easily, as well as
-;;       easily override major mode settings. Follow directions here:
+;; note: can put these all into a minor mode to group them together and deactivate easily,
+;;       as well as easily override major mode settings. Follow directions here:
 ;;       http://stackoverflow.com/questions/683425/globally-override-key-binding-in-emacs
 ;;       for now, just manually override major mode settings that don't respect these
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
@@ -107,18 +106,11 @@
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "C-x g") 'magit-status)
 
-;; could make compile-in-dir shortcut a minor mode
-(add-hook 'f90-mode-hook (lambda () (local-set-key (kbd "C-c C-c") 'compile-in-dir)))
-
-;; bind "make upload" to "C-c C-c" in arduino mode
-(add-hook 'arduino-mode-hook
-          (lambda () (local-set-key (kbd "C-c C-c")
-                                    (lambda () (interactive)
-                                      (compile "make upload")
-                                      (pop-to-buffer "*compilation*")))))
-
-;; instead of minor mode, manually overriding for now
-(add-hook 'ibuffer-mode-hook (lambda () (local-unset-key (kbd "M-o"))))
-
+;; could put these mode-specific types of shortcuts into a minor mode as well
+(mode-set-key 'f90-mode-hook (kbd "C-c C-c") 'compile-in-dir)
+(mode-set-key 'c-mode-hook (kbd "C-c C-c") 'compile-in-dir)
+(mode-set-key 'c++-mode-hook (kbd "C-c C-c") 'compile-in-dir)
+(mode-set-key 'arduino-mode-hook (kbd "C-c C-c") 'arduino-compile)
+(mode-unset-key 'ibuffer-mode-hook (kbd "M-o")) ; instead of minor mode, manually overriding for now
 
 (provide 'init-config)
