@@ -34,6 +34,7 @@
   (interactive)
   (shell (generate-new-buffer-name "*shell*")))
 
+(require 'python)
 (defun create-python-shell ()
   "Open a new Python shell buffer."
   (interactive)
