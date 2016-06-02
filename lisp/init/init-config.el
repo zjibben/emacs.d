@@ -44,19 +44,41 @@
 (setq exec-path (append exec-path '("/opt/cuda/bin")))
 (setenv "PATH" (concat
                 "/opt/cuda/bin:"
-                "/opt/intel/composer_xe_2015.2.164/bin/intel64:"
                 (getenv "PATH") ))
 (setenv "LD_LIBRARY_PATH" (concat
                            "/opt/cuda/lib64:"
-                           "/opt/intel/composer_xe_2015.2.164/compiler/lib/intel64/:"
                            (getenv "LD_LIBRARY_PATH") ))
+
+;; specific settings for my workstation
+(when (string= system-name "erdelyi.lanl.gov")
+  (setenv "PATH" (concat
+                  "/opt/nag/nagfor-5.3.2/bin:"
+                  "/opt/intel/composer_xe_2016/bin/:"
+                  (getenv "PATH") ))
+  (setenv "LD_LIBRARY_PATH" (concat
+                             "/opt/nag/nagfor-5.3.2/lib:"
+                             "/opt/intel/composer_xe_2016/lib/intel64/:"
+                             (getenv "LD_LIBRARY_PATH") ))
+  (setenv "NAG_KUSARI_FILE" "128.165.87.4:"))
 
 ;; fortran settings
 (setq-default f90-do-indent           2
-	      f90-if-indent           2
-	      f90-type-indent         2
-	      f90-program-indent      2
+              f90-if-indent           2
+              f90-type-indent         2
+              f90-program-indent      2
               f90-continuation-indent 4)
+
+;; (use-package f90
+;;   :mode ("\\.\\(F90\\|fpp\\)$" . f90-mode)
+;;   :config
+;;   (setq-default f90-do-indent           2
+;;                 f90-if-indent           2
+;;                 f90-type-indent         2
+;;                 f90-program-indent      2
+;;                 f90-continuation-indent 4)
+;;   (add-hook 'f90-mode-hook 'fci-mode)
+;;   (mode-set-key 'f90-mode-hook (kbd "C-c C-c") 'compile-in-dir)
+;;   )
 
 ;; line length settings
 (setq-default fill-column 101)

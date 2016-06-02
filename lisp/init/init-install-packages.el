@@ -35,6 +35,7 @@
                      rust-mode
                      smex
                      ;tuareg
+                     ;use-package
                      ))
 
 ;; install all the above packages
