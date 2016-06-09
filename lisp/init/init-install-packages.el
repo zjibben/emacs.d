@@ -12,6 +12,7 @@
 (setq package-install-list '(
                      adaptive-wrap
                      ample-theme
+                     arduino-mode
                      auctex
                      djvu
                      eimp
