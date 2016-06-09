@@ -7,7 +7,7 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/init/")
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
-(when (string= system-name "erdelyi.lanl.gov") (require 'init-proxy))
+(when (string-match ".*\.lanl\.gov" system-name) (require 'init-proxy))
 (require 'init-packages)
 (require 'compile-in-dir)
 (require 'init-commands)
