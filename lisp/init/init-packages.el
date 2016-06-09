@@ -13,7 +13,6 @@
                          ;;("marmalade" . "https://marmalade-repo.org/packages/")
                          ))
 (package-initialize)
-(package-refresh-contents)
 
 ;; install missing packages
 (require 'init-install-packages)
@@ -26,7 +25,7 @@
               TeX-engine     'xetex)
 (require 'latex-pretty-symbols)
 
-(pdf-tools-install)
+(pdf-tools-install t nil t)
 
 ;; plantuml-mode
 (setq-default plantuml-jar-path "/opt/plantuml/plantuml.jar")   ;arch
