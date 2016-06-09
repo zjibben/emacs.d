@@ -7,7 +7,7 @@
 
 ;; note proxy addresses and ports are set in init-personal-info.el
 (setq url-proxy-services 
-      `(("no_proxy" . no-proxy-domain)
+      `(("no_proxy" . ,no-proxy-domain)
         ("http"  . ,(concat http-proxy-host  ":" (number-to-string http-proxy-port)))
         ("https" . ,(concat https-proxy-host ":" (number-to-string https-proxy-port))) ))
 
