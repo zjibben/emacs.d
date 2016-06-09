@@ -42,7 +42,7 @@
               )
 
 ;; update path
-(setq exec-path (append exec-path '("/opt/cuda/bin")))
+(setq exec-path (append exec-path '("/opt/cuda/bin:")))
 (setenv "PATH" (concat
                 "/opt/cuda/bin:"
                 (getenv "PATH") ))
