@@ -22,6 +22,7 @@
                      latex-pretty-symbols
                      ;latex-preview-pane
                      magit
+                     markdown-mode
                      ;multi-term
                      ;org-bullets
                      pdf-tools
