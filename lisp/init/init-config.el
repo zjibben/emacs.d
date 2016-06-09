@@ -9,6 +9,7 @@
 (setq-default display-time-default-load-average  nil     ; hide load average in modeline
               display-time-day-and-date          1       ; display both date and time
               indent-tabs-mode                   nil     ; spaces instead of tabs
+              require-final-newline              t       ; ensure files end with a newline
               calc-angle-mode                    'rad    ; calc to radians-mode
               calc-multiplication-has-precedence nil     ; sensible order of operations
               Info-fontify-maximum-menu-size     1000000 ; increase Info highlight limit
