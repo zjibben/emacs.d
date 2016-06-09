@@ -124,10 +124,14 @@
 ;;       for now, just manually override major mode settings that don't respect these
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "<f1>") 'create-shell)
-(global-set-key (kbd "<f2>") 'create-python-shell)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+(global-set-key (kbd "<f1>") 'create-shell)
+(global-set-key (kbd "<f2>") 'create-python-shell)
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; could put these mode-specific types of shortcuts into a minor mode as well
