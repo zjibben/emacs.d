@@ -8,6 +8,7 @@ url
 # files
 *~
 *\#*
+lisp/init/init-private-info.el
 session.*
 tramp
 abbrev_defs
