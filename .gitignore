@@ -10,3 +10,6 @@ url
 *\#*
 session.*
 tramp
+abbrev_defs
+ido.last
+smex-items
