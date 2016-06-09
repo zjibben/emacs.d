@@ -51,7 +51,6 @@
   (add-hook mode-hook `(lambda () (local-unset-key ,key))))
 
 ;; irc
-(require 'init-login-info nil t) ;; attempt to grab login info
 (defun irc-snoonet ()
   "Connect to snoonet"
   (interactive)

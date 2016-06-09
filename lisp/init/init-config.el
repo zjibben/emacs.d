@@ -115,9 +115,6 @@
                  '(".m$"                 . octave-mode)
                  '(".pdf$"               . pdf-view-mode))
 
-;; email
-(setq-default user-mail-address "threeofsix@gmail.com")
-
 ;; keybindings
 ;; note: can put these all into a minor mode to group them together and deactivate easily,
 ;;       as well as easily override major mode settings. Follow directions here:
