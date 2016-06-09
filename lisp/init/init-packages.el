@@ -13,6 +13,7 @@
                          ;;("marmalade" . "https://marmalade-repo.org/packages/")
                          ))
 (package-initialize)
+(package-refresh-contents)
 
 ;; install missing packages
 (require 'init-install-packages)
