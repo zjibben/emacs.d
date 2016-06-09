@@ -7,13 +7,16 @@
 
 ;; set proxy address and port
 ;; TODO: should be set outside this package
-(defvar http-proxy-host "proxyout.lanl.gov" "Host address for http proxy")
-(defvar http-proxy-port 8080                "Host port for http proxy")
+(defvar http-proxy-host  "proxyout.lanl.gov" "Host address for http proxy")
+(defvar http-proxy-port  8080                "Host port for http proxy")
+(defvar no-proxy-domain  "lanl\\.gov"        "Domain for which no proxy is needed")
+(defvar https-proxy-host http-proxy-host     "Host address for https proxy")
+(defvar https-proxy-port http-proxy-port     "Host port for https proxy")
 
 (setq url-proxy-services 
-      `(("no_proxy" . "lanl\\.gov")
-        ("http"  . ,(concat http-proxy-host ":" (number-to-string http-proxy-port)))
-        ("https" . ,(concat http-proxy-host ":" (number-to-string http-proxy-port))) ))
+      `(("no_proxy" . no-proxy-domain)
+        ("http"  . ,(concat http-proxy-host  ":" (number-to-string http-proxy-port)))
+        ("https" . ,(concat https-proxy-host ":" (number-to-string https-proxy-port))) ))
 
 ;; use function from http://www.emacswiki.org/emacs/ErcProxy for telling erc to use the proxy
 (defun open-http-proxy-stream (name buffer host service &rest parameters)
