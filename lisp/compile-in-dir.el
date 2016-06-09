@@ -3,8 +3,7 @@
 ;;
 ;; function for compiling/recompiling in a directory
 ;;
-;; zjibben <threeofsix@gmail.com> 12/2015
-;; 
+;; zjibben <threeofsix@gmail.com>
 
 ;; execute a command in a different directory
 ;; inspired by http://www.emacswiki.org/emacs/CompileCommand#toc7

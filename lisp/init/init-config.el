@@ -3,8 +3,7 @@
 ;;
 ;; initialize basic emacs configuration
 ;;
-;; zjibben <threeofsix@gmail.com> 12/2015
-;; 
+;; zjibben <threeofsix@gmail.com>
 
 ;; basic configuration
 (setq-default display-time-default-load-average  nil     ; hide load average in modeline

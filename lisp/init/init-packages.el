@@ -3,8 +3,7 @@
 ;;
 ;; initialize repositories and packages
 ;;
-;; zjibben <threeofsix@gmail.com> 12/2015
-;; 
+;; zjibben <threeofsix@gmail.com>
 
 ;; add repos
 (require 'package)

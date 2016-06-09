@@ -5,8 +5,7 @@
 ;; It essentially contains most of the configuration from init-config,
 ;; without setting up my packages and more complex commands and modes.
 ;;
-;; zjibben <threeofsix@gmail.com> 12/2015
-;;
+;; zjibben <threeofsix@gmail.com>
 
 ;; basic configuration
 (setq-default indent-tabs-mode                   nil     ; spaces instead of tabs

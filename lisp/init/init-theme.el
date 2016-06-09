@@ -3,8 +3,7 @@
 ;;
 ;; initialize theming
 ;;
-;; zjibben <threeofsix@gmail.com> 12/2015
-;; 
+;; zjibben <threeofsix@gmail.com>
 
 ;;(setq color-theme-is-global nil) ;; only for color-theme package?
 

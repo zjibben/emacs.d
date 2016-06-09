@@ -3,8 +3,7 @@
 ;;
 ;; initialize proxy for emacs internet access
 ;;
-;; zjibben <threeofsix@gmail.com> 12/2015
-;; 
+;; zjibben <threeofsix@gmail.com>
 
 ;; set proxy address and port
 ;; TODO: should be set outside this package

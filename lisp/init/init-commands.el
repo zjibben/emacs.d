@@ -3,8 +3,7 @@
 ;;
 ;; initialize a few commands I use
 ;;
-;; zjibben <threeofsix@gmail.com> 12/2015
-;; 
+;; zjibben <threeofsix@gmail.com>
 
 ;; add a bunch of elements to a list
 (defun add-all-to-list (list &rest elements)
