@@ -14,7 +14,9 @@
   (load-theme 'ample t)
   (if (window-system frame)
       (progn  ;; then
-        (if (<= (display-pixel-width) 1366) (set-frame-font "Monospace 9"))
+        (if (<= (display-pixel-width) 1366)
+            (set-frame-font "Monospace 9")
+          (set-frame-font "Monospace 11"))
         (powerline-default-theme) )
     (progn  ;; else
       ;;(disable-theme 'ample) ;; in case it was active
