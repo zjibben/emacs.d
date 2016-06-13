@@ -6,28 +6,30 @@
 ;; zjibben <threeofsix@gmail.com>
 
 ;; basic configuration
-(setq-default display-time-default-load-average  nil     ; hide load average in modeline
-              display-time-day-and-date          1       ; display both date and time
-              indent-tabs-mode                   nil     ; spaces instead of tabs
-              require-final-newline              t       ; ensure files end with a newline
-              calc-angle-mode                    'rad    ; calc to radians-mode
-              calc-multiplication-has-precedence nil     ; sensible order of operations
-              Info-fontify-maximum-menu-size     1000000 ; increase Info highlight limit
-              shift-select-mode                  nil     ; shift/caps won't select text
-              save-interprogram-paste-before-kill t      ; don't lose clipboard entries
-              ido-everywhere                     t
-              ido-enable-flex-matching           t
-              ido-ignore-extensions              t       ; ido ignores extensions like '~' and '.o'
-              completions-format                 'vertical ; sort along columns rather than rows
-              show-paren-delay                   0       ; show matching parentheses immediately
-              proced-auto-update-flag            t
-              proced-auto-update-interval        2
-
+(setq-default display-time-default-load-average   nil     ; hide load average in modeline
+              display-time-day-and-date           1       ; display both date and time
+              indent-tabs-mode                    nil     ; spaces instead of tabs
+              require-final-newline               t       ; ensure files end with a newline
+              calc-angle-mode                     'rad    ; calc to radians-mode
+              calc-multiplication-has-precedence  nil     ; sensible order of operations
+              Info-fontify-maximum-menu-size      1000000 ; increase Info highlight limit
+              shift-select-mode                   nil     ; shift/caps won't select text
+              save-interprogram-paste-before-kill t       ; don't lose clipboard entries
+              ido-everywhere                      t
+              ido-enable-flex-matching            t
+              ido-ignore-extensions               t       ; ido ignores extensions like '~' and '.o'
+              ido-use-faces                       nil     ; use flx highlights
+              completions-format                  'vertical ; sort along columns rather than rows
+              show-paren-delay                    0       ; show matching parentheses immediately
+              proced-auto-update-flag             t
+              proced-auto-update-interval         2
+              
               ;; smooth scrolling
               scroll-step                1
               scroll-conservatively      10000
               mouse-wheel-scroll-amount '(1 ((shift) . 1)) )
-(ido-mode           1) ; enable ido-mode for switching buffers and finding files (replace with helm?)
+(ido-mode           1) ; enable ido-mode for switching buffers and finding files
+(flx-ido-mode       1)
 (display-time-mode  1) ; activate modeline time and date
 (menu-bar-mode     -1) ; deactivate menubar
 (tool-bar-mode     -1) ; deactivate toolbar
@@ -70,6 +72,7 @@
               f90-type-indent         2
               f90-program-indent      2
               f90-continuation-indent 4)
+(add-to-list 'completion-ignored-extensions ".mod")
 
 ;; (use-package f90
 ;;   :mode ("\\.\\(F90\\|fpp\\)$" . f90-mode)

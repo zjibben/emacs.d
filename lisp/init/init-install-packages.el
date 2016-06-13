@@ -17,6 +17,7 @@
                      djvu
                      eimp
                      fill-column-indicator
+                     flx-ido
                      gnuplot-mode
                      haskell-mode
                      ;helm
