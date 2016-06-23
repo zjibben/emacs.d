@@ -50,6 +50,17 @@
   "Set keyboard shortcut in a given mode."
   (add-hook mode-hook `(lambda () (local-unset-key ,key))))
 
+;; print the result of a shell command to a string,
+;; but do so from an interactive login shell that
+;; gets the user's full environment, and remove any
+;; junk that might have also been printed upon logging in.
+(defun full-shell-command-to-clean-string (command)
+  (car (last
+        (split-string
+         (shell-command-to-string (concat "$SHELL --login -i -c '" command "'"))
+         "\n")
+        2)))
+
 ;; irc
 (defun irc-snoonet ()
   "Connect to snoonet"

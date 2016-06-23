@@ -43,16 +43,13 @@
               ;;gnuplot-program "/usr/bin/gnuplot-qt"    ; Fedora gnuplot location
               )
 
-;; update path
-(setq exec-path (append exec-path '("/opt/cuda/bin:")))
-(setenv "PATH" (concat
-                "/opt/cuda/bin:"
-                (getenv "PATH") ))
-(setenv "LD_LIBRARY_PATH" (concat
-                           "/opt/cuda/lib64:"
-                           (getenv "LD_LIBRARY_PATH") ))
+;; ensure environment is consistent with login environment (ref http://stackoverflow.com/a/6415812)
+(let ((path-from-shell (full-shell-command-to-clean-string "echo $PATH")))
+  (setenv "PATH" path-from-shell)
+  (setq eshell-path-env path-from-shell)
+  (setq exec-path (split-string path-from-shell path-separator)))
 
-;; specific settings for my workstation
+;; workstation-specific settings
 (when (string= system-name "erdelyi.lanl.gov")
   (setenv "PATH" (concat
                   "/opt/nag/nagfor-5.3.2/bin:"
