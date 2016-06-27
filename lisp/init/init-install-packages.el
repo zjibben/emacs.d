@@ -36,6 +36,7 @@
                      smex
                      ;tuareg
                      ;use-package
+                     wordnut
                      ))
 
 ;; install all the above packages, updating the package archive if necessary
