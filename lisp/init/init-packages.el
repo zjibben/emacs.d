@@ -46,6 +46,9 @@
   (compile "make upload")
   (pop-to-buffer "*compilation*"))
 
+;; gpg stuff
+(pinentry-start)
+
 ;; multi-term
 ;; (require 'multi-term)
 ;; (setq multi-term-program "/bin/bash")

@@ -48,6 +48,7 @@
   (setenv "PATH" path-from-shell)
   (setq eshell-path-env path-from-shell)
   (setq exec-path (split-string path-from-shell path-separator)))
+(setenv "INSIDE_EMACS" (format "%s,comint" emacs-version)) ; needed by pinentry
 
 ;; workstation-specific settings
 (when (string= system-name "erdelyi.lanl.gov")

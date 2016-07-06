@@ -27,6 +27,7 @@
                      markdown-mode
                      ;multi-term
                      ;org-bullets
+                     pinentry
                      pdf-tools
                      pkgbuild-mode
                      plantuml-mode
