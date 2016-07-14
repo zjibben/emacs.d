@@ -104,6 +104,8 @@
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)    ;; auto spell-checking in latex
 ;;(add-hook 'LaTeX-mode-hook 'visual-line-mode) ;; break lines between words
 
+(add-hook 'markdown-mode-hook 'flyspell-mode)
+
 (add-hook 'org-mode-hook 'flyspell-mode)             ; auto spell-checking in org
 (add-hook 'org-mode-hook 'visual-line-mode)          ; break lines between words
 (add-hook 'org-mode-hook 'adaptive-wrap-prefix-mode) ; wraped headers are indented properly
