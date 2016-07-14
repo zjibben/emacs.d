@@ -49,6 +49,18 @@
 ;; gpg stuff
 (pinentry-start)
 
+;; mu4e
+;; mu needs to be separately installed, so don't fail if mu4e isn't found
+;; system/user-dependent material is initialized in init-private-info.el
+(if (string-match ".*\.lanl\.gov" system-name)
+    (add-to-list 'load-path "~/opt/mu/share/emacs/site-lisp/mu4e"))
+(require 'mu4e nil t)
+(require 'mu4e-contrib nil t)
+(setq mu4e-html2text-command 'mu4e-shr2text
+      mu4e-get-mail-command "offlineimap"
+      mu4e-update-interval  600
+      message-send-mail-function 'smtpmail-send-it)
+
 ;; multi-term
 ;; (require 'multi-term)
 ;; (setq multi-term-program "/bin/bash")
