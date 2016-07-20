@@ -38,10 +38,14 @@
 (defalias 'yes-or-no-p 'y-or-n-p) ; I don't like typing 2 or 3 characters when I can type 1
 
 ;; default programs
-(setq-default python-shell-interpreter "ipython3"
-              python-shell-interpreter-args "--no-confirm-exit -i"
-              ;;gnuplot-program "/usr/bin/gnuplot-qt"    ; Fedora gnuplot location
-              )
+(setq python-shell-interpreter "ipython3"
+      python-shell-interpreter-args (concat "--no-confirm-exit -i"
+                                            (if (>= (string-to-number
+                                                     (shell-command-to-string "ipython3 --version"))
+                                                    5)
+                                                " --simple-prompt"))
+      ;;gnuplot-program "/usr/bin/gnuplot-qt" ; Fedora gnuplot location
+      )
 
 ;; ensure environment is consistent with login environment (ref http://stackoverflow.com/a/6415812)
 (let ((path-from-shell (full-shell-command-to-clean-string "echo $PATH")))
