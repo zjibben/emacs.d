@@ -1,42 +1,23 @@
-;;
 ;; compile-in-dir
 ;;
-;; function for compiling/recompiling in a directory
+;; function for compiling in a directory,
+;; then storing that given directory for quick recompiles
 ;;
 ;; zjibben <threeofsix@gmail.com>
 
-;; execute a command in a different directory
-;; inspired by http://www.emacswiki.org/emacs/CompileCommand#toc7
-(defun in-directory (&optional command dir)
-  "Runs execute-extended-command with default-directory set to the given directory."
-  (interactive)
+(lexical-let ((compile-in-dir--dir nil)) ; stored compile directory
+  (defun compile-in-dir (&optional get-new-directory)
+    "Issues a compile in a given directory or recompiles
+in last given directory. If given a non-nil argument
+(or prefixed with C-u), it always asks for the directory."
+    (interactive "P")
 
-  ;; if called from a script and the directory is nil, ask the user interactively
-  (or dir (setq dir (read-directory-name "In directory: ")))
+    (if (or get-new-directory (not compile-in-dir--dir))
+        ;; the default-directory variable is used internally in 'compile
+        (let ((default-directory (setq compile-in-dir--dir (read-directory-name "In directory: "))))
+          (call-interactively 'compile))
+      (recompile))
 
-  (let ((default-directory dir))
-    (call-interactively (or command 'execute-extended-command))))
-
-;; compile in a directory/recompile previous compile command
-(defvar compile-in-dir-occurred nil
-  "Indicates to compile-in-dir whether a recompile can be performed.")
-(defun compile-in-dir (&optional force-compile)
-  "Issues a compile (first time) or recompile.
-   If given a non-nil argument (or prefixed with C-u), it issues a compile."
-  (interactive "P")
-
-  ;; force a compile if we haven't compiled yet
-  (or force-compile (setq force-compile (not compile-in-dir-occurred)))
-
-  ;; either compile or recompile
-  (if force-compile
-      (in-directory 'compile)
-    (recompile))
-
-  ;; move the point to the compilation buffer
-  (pop-to-buffer "*compilation*")
-
-  ;; note for later that we have compiled in this session and can now recompile
-  (setq compile-in-dir-occurred t))
+    (pop-to-buffer "*compilation*")))
 
 (provide 'compile-in-dir)
