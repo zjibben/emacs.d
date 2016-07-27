@@ -23,6 +23,7 @@
               show-paren-delay                    0       ; show matching parentheses immediately
               proced-auto-update-flag             t
               proced-auto-update-interval         2
+              doc-view-resolution                 300
               
               ;; smooth scrolling
               scroll-step                1
@@ -91,13 +92,7 @@
 ;; line length settings
 (setq-default fill-column 101)
 (setq-default fci-rule-color "dim gray")
-(add-hook 'f90-mode-hook        'fci-mode)
-(add-hook 'c-mode-hook          'fci-mode)
-(add-hook 'c++-mode-hook        'fci-mode)
-(add-hook 'python-mode-hook     'fci-mode)
-(add-hook 'emacs-lisp-mode-hook 'fci-mode)
-(add-hook 'sh-mode-hook         'fci-mode)
-(add-hook 'arduino-mode-hook    'fci-mode)
+(add-to-mode-hooks '(f90 c c++ python emacs-lisp sh arduino) 'fci-mode)
 (add-hook 'pdf-view-mode-hook 'pdf-tools-enable-minor-modes)
 (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
 (setq TeX-view-program-selection '((output-pdf "pdf-tools")))
@@ -105,10 +100,11 @@
 
 ;; mode settings
 ;; is there a way to make C-e go to the actual end of the line in visual-line-mode??
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)    ;; auto spell-checking in latex
-;;(add-hook 'LaTeX-mode-hook 'visual-line-mode) ;; break lines between words
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)    ; auto spell-checking in latex
+;;(add-hook 'LaTeX-mode-hook 'visual-line-mode) ; break lines between words
 
 (add-hook 'markdown-mode-hook 'flyspell-mode)
+(add-hook 'markdown-mode-hook 'visual-line-mode)
 
 (add-hook 'org-mode-hook 'flyspell-mode)             ; auto spell-checking in org
 (add-hook 'org-mode-hook 'visual-line-mode)          ; break lines between words
@@ -140,10 +136,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; could put these mode-specific types of shortcuts into a minor mode as well
-(mode-set-key 'f90-mode-hook (kbd "C-c C-c") 'compile-in-dir)
-(mode-set-key 'c-mode-hook (kbd "C-c C-c") 'compile-in-dir)
-(mode-set-key 'c++-mode-hook (kbd "C-c C-c") 'compile-in-dir)
-(mode-set-key 'arduino-mode-hook (kbd "C-c C-c") 'arduino-compile)
+(modes-set-key '(f90 c c++ arduino) (kbd "C-c C-c") 'compile-in-dir)
 (mode-unset-key 'ibuffer-mode-hook (kbd "M-o")) ; instead of minor mode, manually overriding for now
 
 (provide 'init-config)
