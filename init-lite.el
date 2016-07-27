@@ -26,6 +26,7 @@
 (tool-bar-mode     -1) ; deactivate toolbar
 (scroll-bar-mode   -1) ; deactivate scroll bar
 (show-paren-mode    1) ; activate matching parenthesis highlighting
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; fortran settings
 (setq-default f90-do-indent           2
