@@ -9,7 +9,7 @@
 (setq proxy-enable nil)
 (require 'init-private-info nil t) ;; attempt to grab private info
 (when proxy-enable (require 'init-proxy))
-(require 'init-packages)
 (require 'init-commands)
+(require 'init-packages)
 (require 'init-config)
 (require 'init-theme)

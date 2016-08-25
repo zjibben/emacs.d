@@ -5,6 +5,8 @@
 ;;
 ;; zjibben <threeofsix@gmail.com>
 
+(require 'cl)
+
 ;; add a bunch of elements to a list
 (defun add-all-to-list (list &rest elements)
   "Add many elements to a list."
