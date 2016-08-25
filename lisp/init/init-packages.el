@@ -24,8 +24,9 @@
 (pdf-tools-install t nil t)
 
 ;; plantuml-mode
-(setq-default plantuml-jar-path "/opt/plantuml/plantuml.jar")   ;arch
-;(setq-default plantuml-jar-path "/usr/share/java/plantuml.jar") ;fedora
+(setq-default plantuml-jar-path (pcase (system-distro)
+                                  ("Arch" "/opt/plantuml/plantuml.jar")
+                                  ("Fedora" "/usr/share/java/plantuml.jar"))
 
 ;; eimp (fit images to window by default)
 (add-hook 'image-mode-hook  'eimp-mode)

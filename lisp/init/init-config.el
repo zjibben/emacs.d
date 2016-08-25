@@ -44,9 +44,8 @@
                                             (if (>= (string-to-number
                                                      (shell-command-to-string "ipython3 --version"))
                                                     5)
-                                                " --simple-prompt"))
-      ;;gnuplot-program "/usr/bin/gnuplot-qt" ; Fedora gnuplot location
-      )
+                                                " --simple-prompt")))
+(when (string= (system-distro) "Fedora") (setq gnuplot-program "/usr/bin/gnuplot-qt"))
 
 ;; ensure environment is consistent with login environment (ref http://stackoverflow.com/a/6415812)
 (let ((path-from-shell (full-shell-command-to-clean-string "echo $PATH")))
