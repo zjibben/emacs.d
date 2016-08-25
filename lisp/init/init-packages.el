@@ -1,16 +1,13 @@
-;;
-;; init-packages
-;;
 ;; initialize repositories and packages
 ;;
 ;; zjibben <threeofsix@gmail.com>
 
 ;; add repos
+;; LANL proxy doesn't like some https, so need to use http when behind it
 (require 'package)
-(setq package-archives '(("gnu"   . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")
-                         ;;("marmalade" . "https://marmalade-repo.org/packages/")
-                         ))
+(add-to-list 'package-archives
+             `("melpa" . ,(if proxy-enable "http://melpa.org/packages/"
+                            "https://melpa.org/packages/")))
 (package-initialize)
 
 ;; install missing packages
