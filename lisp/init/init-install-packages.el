@@ -8,10 +8,8 @@
 ;;
 ;; zjibben <threeofsix@gmail.com>
 
-;; TODO: might be able to replace this with the new variable package-selected-packages?
-
 ;; list of packages to have installed
-(setq package-install-list '(
+(setq package-selected-packages '(
                      adaptive-wrap
                      ample-theme
                      arduino-mode
@@ -38,24 +36,31 @@
                      pkgbuild-mode
                      plantuml-mode
                      powerline
-                     ;powershell
+                     powershell
                      python-info
                      rust-mode
                      smex
-                     ;tuareg
-                     ;use-package
-                     wordnut)
-      package-selected-packages package-install-list)
+                     use-package
+                     wordnut))
 
 ;; install all the above packages, updating the package archive if necessary
-(unless package-archive-contents (package-refresh-contents))
-(dolist (package package-install-list) (package-install package))
+(if (>= (string-to-number emacs-version) 25)
+    (package-install-selected-packages)
+    (progn
+      (unless package-archive-contents (package-refresh-contents))
+      (dolist (package package-selected-packages) (package-install package))))
 
 ;; TODO: patch latex-pretty-symbols
 
 ;; other packages worth noting:
 ;;   achievements
 ;;   color-theme
+;;   tuareg
+;;   multi-term
+;;   helm
+;;   ivy
+;;   latex-preview-pane
+;;   org-bullets
 
 ;; other themes:
 ;;   almost-monokai
