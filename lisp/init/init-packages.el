@@ -4,11 +4,9 @@
 
 ;; add repos
 ;; LANL proxy doesn't like some https, so need to use http when behind it
-(require 'package)
 (add-to-list 'package-archives
              `("melpa" . ,(if proxy-enable "http://melpa.org/packages/"
                             "https://melpa.org/packages/")))
-(package-initialize)
 
 ;; install missing packages
 (require 'init-install-packages)

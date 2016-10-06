@@ -10,6 +10,7 @@
 (require 'init-private-info nil t) ;; attempt to grab private info
 (when proxy-enable (require 'init-proxy))
 (require 'init-commands)
+(package-initialize)
 (require 'init-packages)
 (require 'init-config)
 (require 'init-theme)
