@@ -8,37 +8,44 @@
 ;;
 ;; zjibben <threeofsix@gmail.com>
 
+;; TODO: might be able to replace this with the new variable package-selected-packages?
+
 ;; list of packages to have installed
 (setq package-install-list '(
                      adaptive-wrap
                      ample-theme
                      arduino-mode
                      auctex
+                     cmake-mode
                      djvu
                      eimp
+                     elpy
+                     ;ein
                      fill-column-indicator
                      flx-ido
                      gnuplot-mode
                      haskell-mode
                      ;helm
+                     julia-mode
                      latex-pretty-symbols
                      ;latex-preview-pane
                      magit
                      markdown-mode
                      ;multi-term
                      ;org-bullets
-                     pinentry
                      pdf-tools
+                     pinentry
                      pkgbuild-mode
                      plantuml-mode
                      powerline
+                     ;powershell
                      python-info
                      rust-mode
                      smex
                      ;tuareg
                      ;use-package
-                     wordnut
-                     ))
+                     wordnut)
+      package-selected-packages package-install-list)
 
 ;; install all the above packages, updating the package archive if necessary
 (unless package-archive-contents (package-refresh-contents))
