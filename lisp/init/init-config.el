@@ -38,6 +38,9 @@
 (show-paren-mode    1) ; activate matching parenthesis highlighting
 (defalias 'yes-or-no-p 'y-or-n-p) ; I don't like typing 2 or 3 characters when I can type 1
 
+;; open shells in current window
+(add-to-list 'display-buffer-alist '("^\\*shell\\*$" . (display-buffer-same-window)))
+
 ;; default programs
 (setq python-shell-interpreter "ipython3"
       python-shell-interpreter-args (concat "--no-confirm-exit -i"
