@@ -71,6 +71,15 @@
                              (getenv "LD_LIBRARY_PATH") ))
   (setenv "NAG_KUSARI_FILE" "128.165.87.4:"))
 
+(when (string= system-name "annapurna")
+  (setenv "PATH" (concat
+                  "/opt/intel/bin"
+                  (getenv "PATH")))
+  (setenv "LD_LIBRARY_PATH" (concat
+                             "/opt/intel/lib/intel64/:"
+                             "/opt/openmpi/1.6.5-intel14/lib/:"
+                             (getenv "LD_LIBRARY_PATH"))))
+
 ;; fortran settings
 (setq-default f90-do-indent           2
               f90-if-indent           2
