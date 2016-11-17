@@ -55,7 +55,7 @@
   (let ((dir (directory-file-name dir-name)))
     (or
      ;; attempt to use ctags
-     (eql (shell-command (format "ctags -f %s/TAGS -e -R" dir)) 0)
+     (eql (shell-command (format "cd %s && ctags -eRf TAGS" dir)) 0)
 
      ;; if ctags isn't found, use etags
      ;; case insensitive, including .f .f90 .c .h .cu .cl files (add .py?)
