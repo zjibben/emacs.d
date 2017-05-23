@@ -59,20 +59,7 @@
 (setenv "INSIDE_EMACS" (format "%s,comint" emacs-version)) ; needed by pinentry
 
 ;; workstation-specific settings
-(when (string= system-name "erdelyi.lanl.gov")
-  (setenv "PATH" (concat
-                  "/opt/nag/nagfor-5.3.2/bin:"
-                  "/opt/intel/composer_xe_2016/bin/:"
-                  "/opt/openmpi/1.6.5-intel14/bin/:"
-                  (getenv "PATH") ))
-  (setenv "LD_LIBRARY_PATH" (concat
-                             "/opt/nag/nagfor-5.3.2/lib:"
-                             "/opt/intel/composer_xe_2016/lib/intel64/:"
-                             "/opt/openmpi/1.6.5-intel14/lib/:"
-                             (getenv "LD_LIBRARY_PATH") ))
-  (setenv "NAG_KUSARI_FILE" "128.165.87.4:"))
-
-(when (string= system-name "annapurna")
+(when (or (string= system-name "annapurna") (string= system-name "erdelyi.lanl.gov"))
   (setenv "PATH" (concat
                   "/opt/intel/bin"
                   (getenv "PATH")))
