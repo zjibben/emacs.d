@@ -41,10 +41,13 @@
                      rust-mode
                      smex
                      use-package
-                     wordnut))
+                     wordnut
+                     yaml-mode
+                     ))
 
 ;; install all the above packages, updating the package archive if necessary
 (if (>= (string-to-number emacs-version) 25)
+    (package-refresh-contents)
     (package-install-selected-packages)
     (progn
       (unless package-archive-contents (package-refresh-contents))
