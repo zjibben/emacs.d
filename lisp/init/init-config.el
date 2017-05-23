@@ -29,6 +29,7 @@
               scroll-step                1
               scroll-conservatively      10000
               mouse-wheel-scroll-amount '(1 ((shift) . 1)) )
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 (ido-mode           1) ; enable ido-mode for switching buffers and finding files
 (flx-ido-mode       1)
 (display-time-mode  1) ; activate modeline time and date
