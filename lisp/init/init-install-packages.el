@@ -25,7 +25,7 @@
                      haskell-mode
                      ;helm
                      julia-mode
-                     latex-pretty-symbols
+                     ;latex-pretty-symbols
                      ;latex-preview-pane
                      magit
                      markdown-mode

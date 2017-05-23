@@ -17,7 +17,7 @@
               TeX-parse-self  t)
 (setq-default TeX-master      nil
               TeX-engine     'xetex)
-(require 'latex-pretty-symbols)
+
 
 (pdf-tools-install t nil t)
 
