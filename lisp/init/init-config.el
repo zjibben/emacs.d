@@ -19,6 +19,7 @@
               ido-enable-flex-matching            t
               ido-ignore-extensions               t       ; ido ignores extensions like '~' and '.o'
               ido-use-faces                       nil     ; use flx highlights
+              ido-default-buffer-method           'selected-window
               completions-format                  'vertical ; sort along columns rather than rows
               show-paren-delay                    0       ; show matching parentheses immediately
               proced-auto-update-flag             t
