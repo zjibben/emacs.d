@@ -24,7 +24,7 @@
               proced-auto-update-flag             t
               proced-auto-update-interval         2
               doc-view-resolution                 300
-              
+
               ;; smooth scrolling
               scroll-step                1
               scroll-conservatively      10000
@@ -126,7 +126,9 @@
 ;;       for now, just manually override major mode settings that don't respect these
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "M-o") 'next-multiframe-window)
+(global-set-key (kbd "M-O") 'previous-multiframe-window)
+(global-set-key (kbd "M-o") (lambda () (interactive) (other-window  1)))
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
