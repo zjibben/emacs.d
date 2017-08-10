@@ -129,8 +129,6 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "M-o") 'next-multiframe-window)
 (global-set-key (kbd "M-O") 'previous-multiframe-window)
-(global-set-key (kbd "M-o") (lambda () (interactive) (other-window  1)))
-(global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward)
