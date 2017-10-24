@@ -25,6 +25,7 @@
               proced-auto-update-flag             t
               proced-auto-update-interval         2
               doc-view-resolution                 300
+              compile-command "make -j "
 
               ;; smooth scrolling
               scroll-step                1
