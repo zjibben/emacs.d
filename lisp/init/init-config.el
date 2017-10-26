@@ -103,7 +103,9 @@
 ;; is there a way to make C-e go to the actual end of the line in visual-line-mode??
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)    ; auto spell-checking in latex
 (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
-;; TODO: add symbols to prettify-symbols-mode
+(add-hook 'LaTeX-mode-hook (lambda () (add-all-to-list 'prettify-symbols-alist
+                                                       '("\\left(" . ?()
+                                                       '("\\right)" . ?)))))
 ;;(add-hook 'LaTeX-mode-hook 'visual-line-mode) ; break lines between words
 
 (add-hook 'markdown-mode-hook 'flyspell-mode)
