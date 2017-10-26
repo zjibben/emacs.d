@@ -104,8 +104,8 @@
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)    ; auto spell-checking in latex
 (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
 (add-hook 'LaTeX-mode-hook (lambda () (add-all-to-list 'prettify-symbols-alist
-                                                       '("\\left(" . ?()
-                                                       '("\\right)" . ?)))))
+                                                       '("\\right)" . ?)
+                                                       '("\\left(" . ?()))))
 ;;(add-hook 'LaTeX-mode-hook 'visual-line-mode) ; break lines between words
 
 (add-hook 'markdown-mode-hook 'flyspell-mode)
