@@ -31,7 +31,6 @@
               scroll-step                1
               scroll-conservatively      10000
               mouse-wheel-scroll-amount '(1 ((shift) . 1)) )
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 (ido-mode           1) ; enable ido-mode for switching buffers and finding files
 (flx-ido-mode       1)
 (display-time-mode  1) ; activate modeline time and date
@@ -100,6 +99,8 @@
 (setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
 
 ;; mode settings
+(add-hook 'prog-mode-hook (lambda () (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)))
+
 ;; is there a way to make C-e go to the actual end of the line in visual-line-mode??
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)    ; auto spell-checking in latex
 (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
