@@ -20,12 +20,14 @@
               show-paren-delay                   0       ; show matching parentheses immediately
               scroll-step                        1       ; smooth scrolling
               scroll-conservatively              10000
-              )
+              whitespace-line-column 80
+              whitespace-style       '(face lines-tail))
 ;;(ido-mode           1) ; enable ido-mode for switching buffers and finding files (slows startup)
 (menu-bar-mode     -1) ; deactivate menubar
 (tool-bar-mode     -1) ; deactivate toolbar
 (scroll-bar-mode   -1) ; deactivate scroll bar
 (show-paren-mode    1) ; activate matching parenthesis highlighting
+(add-hook 'prog-mode-hook 'whitespace-mode)
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; fortran settings
