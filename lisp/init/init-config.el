@@ -40,6 +40,10 @@
 (show-paren-mode    1) ; activate matching parenthesis highlighting
 (defalias 'yes-or-no-p 'y-or-n-p) ; I don't like typing 2 or 3 characters when I can type 1
 
+;; give emacs a dark window
+(shell-command "xprop -f _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT 'dark' \
+          -id $(xprop -root | awk '/^_NET_ACTIVE_WINDOW/ {print $5}')")
+
 ;; open shells in current window
 (add-to-list 'display-buffer-alist '("^\\*shell\\*$" . (display-buffer-same-window)))
 
