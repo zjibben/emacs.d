@@ -39,7 +39,7 @@
 (scroll-bar-mode   -1) ; deactivate scroll bar
 (show-paren-mode    1) ; activate matching parenthesis highlighting
 (defalias 'yes-or-no-p 'y-or-n-p) ; I don't like typing 2 or 3 characters when I can type 1
-
+(add-to-list 'default-frame-alist '(width . 102))
 (add-hook 'after-make-frame-functions 'raise-frame t) ; automatically focus new frames
 
 ;; give emacs a dark window
