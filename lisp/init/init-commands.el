@@ -1,9 +1,6 @@
-;;
 ;; init-commands
 ;;
-;; initialize a few commands I use
-;;
-;; zjibben <threeofsix@gmail.com>
+;; initialize my own commands
 
 (require 'cl)
 
@@ -59,7 +56,7 @@
 
      ;; if ctags isn't found, use etags
      ;; case insensitive, including .f .f90 .c .h .cu .cl files (add .py?)
-     (shell-command 
+     (shell-command
       (format "find %s -type f -iname \"*.f90\" -o -iname \"*.[fch]\" -o -iname \"*.c[lu]\" \\
             | etags - -o %s/TAGS" dir dir)))))
 

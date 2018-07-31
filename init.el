@@ -1,7 +1,4 @@
-;;
-;; emacs configuration file
-;;
-;; zjibben <threeofsix@gmail.com>
+;; my emacs configuration file
 
 (add-to-list 'load-path "~/.emacs.d/lisp/init/")
 (add-to-list 'load-path "~/.emacs.d/lisp/")

@@ -1,11 +1,7 @@
-;;
 ;; init-config
 ;;
-;; initialize basic emacs configuration
-;;
-;; zjibben <threeofsix@gmail.com>
+;; basic emacs configuration
 
-;; basic configuration
 (setq-default display-time-default-load-average   nil     ; hide load average in modeline
               display-time-day-and-date           1       ; display both date and time
               indent-tabs-mode                    nil     ; spaces instead of tabs

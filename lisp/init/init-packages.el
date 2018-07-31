@@ -1,6 +1,6 @@
-;; initialize repositories and packages
+;; init-packages
 ;;
-;; zjibben <threeofsix@gmail.com>
+;; initialize repositories and packages
 
 ;; add repos
 ;; LANL proxy doesn't like some https, so need to use http when behind it
