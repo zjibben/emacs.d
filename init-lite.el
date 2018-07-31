@@ -35,9 +35,10 @@
               f90-continuation-indent 4)
 
 ;; set file ending defaults
-(add-to-list 'auto-mode-alist '("\\.\\(F90\\|fpp\\)$" . f90-mode   ))
-(add-to-list 'auto-mode-alist '("\\.\\(cu\\|cl\\)$"   . c-mode     ))
-(add-to-list 'auto-mode-alist '(".m$"                 . octave-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(F90\\|fpp\\)$" . f90-mode))
+(add-to-list 'auto-mode-alist '(".cu$" . c++-mode))
+(add-to-list 'auto-mode-alist '(".cl$" . c-mode))
+(add-to-list 'auto-mode-alist '(".m$" . octave-mode))
 
 ;; keybindings
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)

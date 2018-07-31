@@ -126,10 +126,11 @@
 
 ;; set file ending defaults
 (add-all-to-list 'auto-mode-alist
-                 '("\\.\\(F90\\|fpp\\)$" . f90-mode   )
-                 '("\\.\\(cu\\|cl\\)$"   . c-mode     )
-                 '(".m$"                 . octave-mode)
-                 '(".pdf$"               . pdf-view-mode))
+                 '("\\.\\(F90\\|fpp\\)$" . f90-mode)
+                 '(".cu$" . c++-mode)
+                 '(".cl$" . c-mode)
+                 '(".m$" . octave-mode)
+                 '(".pdf$" . pdf-view-mode))
 
 ;; keybindings
 ;; note: can put these all into a minor mode to group them together and deactivate easily,
