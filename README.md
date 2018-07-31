@@ -1,3 +1,5 @@
+This is a legacy version of my input file, kept for working with remote systems which only have Emacs 24 available. Lots of functionality is stripped away, 
+
 # About
 
 My Emacs configuration. I keep fairly true to the Emacs defaults, only modifying the look and adding a few shortcuts and commands, without doing anything too drastic.
