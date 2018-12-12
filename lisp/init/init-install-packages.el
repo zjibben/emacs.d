@@ -37,13 +37,7 @@
         ))
 
 ;; install all the above packages, updating the package archive if necessary
-(if (>= (string-to-number emacs-version) 25)
-    (progn (package-refresh-contents)
-	   (package-install-selected-packages))
-
-  (progn (package-refresh-contents)
-         (dolist (package package-selected-packages)
-           (unless (package-installed-p package)
-             (package-install package)))))
+(package-refresh-contents)
+(package-install-selected-packages)
 
 (provide 'init-install-packages)

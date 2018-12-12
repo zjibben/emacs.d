@@ -49,7 +49,7 @@ LaTeX and Org modes automatically spell check and display LaTeX macros like `\al
 
 ## Dependencies
 
-For the most basic usage, the only dependency is Emacs. However, use of individual packages require their dependencies. For everything, these are required:
+For the most basic usage, the only dependency is Emacs 25 or greater. However, use of individual packages require their dependencies. For everything, these are required:
 
 - texlive
 - ipython3

@@ -21,7 +21,7 @@
               proced-auto-update-flag             t
               proced-auto-update-interval         2
               doc-view-resolution                 300
-              compile-command "make -j "
+              compile-command "make -j8 "
 
               ;; smooth scrolling
               scroll-step                1
