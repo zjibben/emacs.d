@@ -65,16 +65,6 @@
   (setq exec-path (split-string path-from-shell path-separator)))
 (setenv "INSIDE_EMACS" (format "%s,comint" emacs-version)) ; needed by pinentry
 
-;; workstation-specific settings
-(when (or (string= system-name "annapurna") (string= system-name "erdelyi.lanl.gov"))
-  (setenv "PATH" (concat
-                  "/opt/intel/bin"
-                  (getenv "PATH")))
-  (setenv "LD_LIBRARY_PATH" (concat
-                             "/opt/intel/lib/intel64/:"
-                             "/opt/openmpi/1.6.5-intel14/lib/:"
-                             (getenv "LD_LIBRARY_PATH"))))
-
 ;; fortran settings
 (setq-default f90-do-indent           2
               f90-if-indent           2
