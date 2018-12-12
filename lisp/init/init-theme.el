@@ -4,6 +4,14 @@
 
 ;;(setq color-theme-is-global nil) ;; only for color-theme package?
 
+;; give emacs a dark window
+(defun dark-window-border (&optional frame)
+  (if frame (select-frame frame))
+  (if (window-system frame)
+      (shell-command "xprop -f _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT 'dark' \
+                            -id $(xprop -root | awk '/^_NET_ACTIVE_WINDOW/ {print $5}')")))
+(add-hook 'after-make-frame-functions 'dark-window-border t)
+
 ;; select the font size based on screen size and resolution
 (defun font-size ()
   (let ((mm-width (nth 1 (assoc 'mm-size (frame-monitor-attributes)))))

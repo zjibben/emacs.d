@@ -38,14 +38,6 @@
 (add-to-list 'default-frame-alist '(width . 102))
 (add-hook 'after-make-frame-functions 'raise-frame t) ; automatically focus new frames
 
-;; give emacs a dark window
-(defun dark-window-border (&optional frame)
-  (if frame (select-frame frame))
-  (if (window-system frame)
-      (shell-command "xprop -f _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT 'dark' \
-                            -id $(xprop -root | awk '/^_NET_ACTIVE_WINDOW/ {print $5}')")))
-(add-hook 'after-make-frame-functions 'dark-window-border t)
-
 ;; open shells in current window
 (add-to-list 'display-buffer-alist '("^\\*shell\\*$" . (display-buffer-same-window)))
 
