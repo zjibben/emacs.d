@@ -65,6 +65,9 @@
   (setq exec-path (split-string path-from-shell path-separator)))
 (setenv "INSIDE_EMACS" (format "%s,comint" emacs-version)) ; needed by pinentry
 
+;; make tramp respect remote PATH variable
+(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+
 ;; fortran settings
 (setq-default f90-do-indent           2
               f90-if-indent           2
