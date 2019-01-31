@@ -43,7 +43,7 @@
 
 ;; default programs
 (setq python-shell-interpreter "ipython3"
-      python-shell-interpreter-args (concat "--no-confirm-exit -i"
+      python-shell-interpreter-args (concat "--no-confirm-exit"
                                             (if (>= (string-to-number
                                                      (shell-command-to-string "ipython3 --version"))
                                                     5)

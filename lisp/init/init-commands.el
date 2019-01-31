@@ -69,7 +69,15 @@
 (defun create-python-shell ()
   "Open a new Python shell buffer."
   (interactive)
-  (pop-to-buffer (process-buffer (python-shell-get-or-create-process (python-shell-parse-command))))
+
+  ;; for some reason, if the current buffer is a python shell, creating a new
+  ;; shell screws up existing ones. switch to scratch before making the new one.
+  (set-buffer "*scratch*")
+  (pop-to-buffer
+   (python-shell-make-comint
+    (python-shell-calculate-command)
+    (generate-new-buffer-name "*python*")
+    t))
   ;; rename the buffer after the fact, because Emacs's internal commands for
   ;; making Python shells do their own manipulation on any buffer name you hand it
   (rename-buffer (generate-new-buffer-name "*python*")))
