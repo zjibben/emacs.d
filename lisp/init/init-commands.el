@@ -71,16 +71,16 @@
   (interactive)
 
   ;; for some reason, if the current buffer is a python shell, creating a new
-  ;; shell screws up existing ones. switch to scratch before making the new one.
-  (set-buffer "*scratch*")
-  (pop-to-buffer
-   (python-shell-make-comint
-    (python-shell-calculate-command)
-    (generate-new-buffer-name "*python*")
-    t))
-  ;; rename the buffer after the fact, because Emacs's internal commands for
-  ;; making Python shells do their own manipulation on any buffer name you hand it
-  (rename-buffer (generate-new-buffer-name "*python*")))
+  ;; shell screws up existing ones. switch to temp buffer before making the new one.
+  (with-temp-buffer
+    (pop-to-buffer
+     (python-shell-make-comint
+      (python-shell-calculate-command)
+      (generate-new-buffer-name "*python*")
+      t))
+    ;; rename the buffer after the fact, because Emacs's internal commands for
+    ;; making Python shells do their own manipulation on any buffer name you hand it
+    (rename-buffer (generate-new-buffer-name "*python*"))))
 
 ;; quick macro directly to snoonet
 (defun irc-snoonet ()
