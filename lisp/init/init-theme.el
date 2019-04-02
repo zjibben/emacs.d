@@ -29,18 +29,26 @@
   (load-theme 'ample t)
   (if (window-system frame)
       (progn
-        (set-frame-font (concat "Monospace " (number-to-string (font-size))))
+        (set-frame-font (concat "DejaVu Sans Mono " (number-to-string (font-size))))
         (powerline-default-theme))
     (progn
       ;;(disable-theme 'ample) ;; in case it was active
       (set-face-background 'default "unspecified-bg" (selected-frame)) ;; terminal sets bg color
       (powerline-vim-theme) ) )
   (display-splash-screen)
+
+  ;; fix issue where italics showing up as underlined
+  (set-face-attribute 'italic nil
+                      :slant 'italic
+                      :underline nil)
+
   ;; matching parenthesis highlighting settings
   (set-face-attribute 'show-paren-match nil
                       :weight     'normal
                       :foreground "lemon chiffon"
-                      :background "default") )
+                      :background "default"))
+
+
 (add-hook 'after-make-frame-functions 'set-theme t) ;; append
 (set-theme) ;; run manually for non-server/client mode
 
