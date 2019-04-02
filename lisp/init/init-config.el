@@ -69,6 +69,9 @@
               f90-continuation-indent 4)
 (add-to-list 'completion-ignored-extensions ".mod")
 
+;; python settings
+(setq-default python-indent-guess-indent-offset nil)
+
 ;; (use-package f90
 ;;   :mode ("\\.\\(F90\\|fpp\\)$" . f90-mode)
 ;;   :config
