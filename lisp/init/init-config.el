@@ -21,6 +21,7 @@
               proced-auto-update-flag             t
               proced-auto-update-interval         2
               doc-view-resolution                 300
+              enable-remote-dir-locals            t
               compile-command "make -j8 "
               ediff-split-window-function 'split-window-horizontally
 
