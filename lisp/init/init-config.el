@@ -86,7 +86,7 @@
 ;;   )
 
 ;; line length settings
-(setq-default fill-column 101)
+(setq-default fill-column 100)
 (setq-default fci-rule-color "dim gray")
 (add-to-mode-hooks '(f90 c c++ python emacs-lisp sh arduino) 'fci-mode)
 (add-hook 'pdf-view-mode-hook 'pdf-tools-enable-minor-modes)
@@ -95,7 +95,8 @@
 (setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
 
 ;; mode settings
-(add-hook 'prog-mode-hook (lambda () (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)))
+(add-hook 'prog-mode-hook
+          (lambda () (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)))
 
 ;; is there a way to make C-e go to the actual end of the line in visual-line-mode??
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)    ; auto spell-checking in latex
