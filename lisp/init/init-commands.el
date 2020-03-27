@@ -11,7 +11,7 @@
 
 (defun hook-from-mode (mode)
   "Return the hook for a given mode."
-  (intern (concat (symbol-name mode) "-mode-hook")))
+  (intern (concat (symbol-name mode) "-hook")))
 
 (defun add-to-mode-hooks (modes func)
   "Add a function to many mode hooks."
@@ -28,6 +28,10 @@
 (defun mode-unset-key (mode-hook key)
   "Set keyboard shortcut in a given mode."
   (add-hook mode-hook `(lambda () (local-unset-key ,key))))
+
+(defmacro setq-mode-default (mode variable value)
+  "Set a variable default in a given mode."
+  `(add-hook (hook-from-mode ,mode) (lambda () (setq ,variable ,value))))
 
 (defun system-distro () (car (split-string (shell-command-to-string "lsb_release -si") "\n")))
 

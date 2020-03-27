@@ -86,17 +86,20 @@
 ;;   )
 
 ;; line length settings
-(setq-default fill-column 100)
-(setq-default fci-rule-color "dim gray")
-(add-to-mode-hooks '(f90 c c++ python emacs-lisp sh arduino) 'fci-mode)
+(add-to-mode-hooks '(f90-mode c-mode c++-mode python-mode emacs-lisp-mode sh-mode markdown-mode
+                              arduino-mode) 'fci-mode)
+(setq-default fci-rule-color "dim gray"
+              fill-column 100)
+(setq-mode-default 'markdown-mode fill-column 80)
+(setq-mode-default 'org-mode fill-column 80)
 (add-hook 'pdf-view-mode-hook 'pdf-tools-enable-minor-modes)
 (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
 (setq TeX-view-program-selection '((output-pdf "pdf-tools")))
 (setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
 
 ;; mode settings
-(add-hook 'prog-mode-hook
-          (lambda () (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)))
+;; (add-hook 'prog-mode-hook
+;;           (lambda () (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)))
 
 ;; is there a way to make C-e go to the actual end of the line in visual-line-mode??
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)    ; auto spell-checking in latex
@@ -107,8 +110,10 @@
                                                        '("\\right)" . ?)) '("\\left(" . ?())))
 ;;(add-hook 'LaTeX-mode-hook 'visual-line-mode) ; break lines between words
 
+
 (add-hook 'markdown-mode-hook 'flyspell-mode)
 (add-hook 'markdown-mode-hook 'visual-line-mode)
+(setq-default markdown-command "pandoc")
 
 (require 'org)
 (add-hook 'org-mode-hook 'flyspell-mode)             ; auto spell-checking in org
