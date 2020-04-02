@@ -89,7 +89,8 @@
 (add-to-mode-hooks '(f90-mode c-mode c++-mode python-mode emacs-lisp-mode sh-mode markdown-mode
                               arduino-mode) 'fci-mode)
 (setq-default fci-rule-color "dim gray"
-              fill-column 100)
+              fill-column 100
+              sentence-end-double-space nil)
 (setq-mode-default 'markdown-mode fill-column 80)
 (setq-mode-default 'org-mode fill-column 80)
 (add-hook 'pdf-view-mode-hook 'pdf-tools-enable-minor-modes)
