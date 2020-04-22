@@ -151,7 +151,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; could put these mode-specific types of shortcuts into a minor mode as well
-(modes-set-key '(f90 c c++ arduino) (kbd "C-c C-c") 'compile-in-dir)
+(modes-set-key '(f90-mode c-mode c++-mode arduino-mode) (kbd "C-c C-c") 'compile-in-dir)
 (mode-unset-key 'ibuffer-mode-hook (kbd "M-o")) ; instead of minor mode, manually overriding for now
 
 (provide 'init-config)
