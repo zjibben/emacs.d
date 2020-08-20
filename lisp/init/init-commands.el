@@ -112,4 +112,14 @@ in last given directory. If given a non-nil argument
 
     (pop-to-buffer "*compilation*")))
 
+(defun create-org-log ()
+  "Add an org log timestamp at point."
+  (interactive)
+  (org-insert-drawer nil "LOGBOOK")
+  (insert "- Created ")
+  (org-insert-time-stamp (current-time) nil t)
+  (org-up-element)
+  (org-up-element)
+  (org-cycle))
+
 (provide 'init-commands)
