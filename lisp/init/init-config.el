@@ -67,7 +67,9 @@
               f90-if-indent           2
               f90-type-indent         2
               f90-program-indent      2
-              f90-continuation-indent 4)
+              f90-continuation-indent 4
+              js-indent-level 3
+              )
 (add-to-list 'completion-ignored-extensions ".mod")
 
 ;; python settings

@@ -19,6 +19,7 @@
         gnuplot-mode
         haskell-mode
         julia-mode
+        lua-mode
         magit
         markdown-mode
         ;;multi-term
