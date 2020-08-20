@@ -4,8 +4,11 @@
 ;; It essentially contains most of the configuration from init-config,
 ;; without setting up my packages and more complex commands and modes.
 
+(package-initialize)
+
 ;; basic configuration
 (setq-default indent-tabs-mode                   nil     ; spaces instead of tabs
+              require-final-newline              t       ; ensure files end with a newline
               calc-angle-mode                    'rad    ; calc to radians-mode
               calc-multiplication-has-precedence nil     ; sensible order of operations
               Info-fontify-maximum-menu-size     1000000 ; increase Info highlight limit
@@ -18,7 +21,9 @@
               scroll-step                        1       ; smooth scrolling
               scroll-conservatively              10000
               whitespace-line-column 100
-              whitespace-style       '(face lines-tail))
+              whitespace-style       '(face lines-tail)
+              ediff-split-window-function 'split-window-horizontally
+              )
 ;;(ido-mode           1) ; enable ido-mode for switching buffers and finding files (slows startup)
 (menu-bar-mode     -1) ; deactivate menubar
 (tool-bar-mode     -1) ; deactivate toolbar
@@ -39,6 +44,7 @@
 (add-to-list 'auto-mode-alist '(".cu$" . c++-mode))
 (add-to-list 'auto-mode-alist '(".cl$" . c-mode))
 (add-to-list 'auto-mode-alist '(".m$" . octave-mode))
+(add-to-list 'auto-mode-alist '("PKGBUILD$" . conf-mode))
 
 ;; keybindings
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
