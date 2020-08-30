@@ -1,8 +1,10 @@
+;; -*- lexical-binding: t -*-
+;;
 ;; init-commands
 ;;
 ;; initialize my own commands
 
-(require 'cl)
+;(require 'cl-lib)
 
 ;; add a bunch of elements to a list
 (defun add-all-to-list (list &rest elements)
@@ -97,7 +99,7 @@
 
 ;; function for compiling in a directory,
 ;; then storing that given directory for quick recompiles
-(lexical-let ((compile-in-dir--dir nil)) ; stored compile directory
+(let ((compile-in-dir--dir nil)) ; stored compile directory
   (defun compile-in-dir (&optional get-new-directory)
     "Issues a compile in a given directory or recompiles
 in last given directory. If given a non-nil argument
