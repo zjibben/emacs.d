@@ -122,6 +122,9 @@ in last given directory. If given a non-nil argument
   (org-insert-time-stamp (current-time) nil t)
   (org-up-element)
   (org-up-element)
-  (org-cycle))
+  (org-cycle)
+  (next-line)
+  (org-return-indent)
+  (org-open-line 1))
 
 (provide 'init-commands)
