@@ -13,6 +13,7 @@
               calc-multiplication-has-precedence nil     ; sensible order of operations
               Info-fontify-maximum-menu-size     1000000 ; increase Info highlight limit
               shift-select-mode                  nil     ; shift/caps won't select text
+              column-number-mode                 t
               ido-everywhere                     t
               ido-enable-flex-matching           t
               ido-ignore-extensions              t       ; ido ignores extensions like '~' and '.o'
