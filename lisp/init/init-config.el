@@ -13,7 +13,7 @@
               save-interprogram-paste-before-kill t       ; don't lose clipboard entries
               ido-everywhere                      t
               ido-enable-flex-matching            t
-              ido-ignore-extensions               t       ; ido ignores extensions like '~' and '.o'
+              ido-ignore-extensions               t     ; ido ignores extensions like '~' and '.o'
               ido-use-faces                       nil     ; use flx highlights
               ido-default-buffer-method           'selected-window
               completions-format                  'vertical ; sort along columns rather than rows
@@ -24,6 +24,7 @@
               enable-remote-dir-locals            t
               compile-command "make -j8 "
               ediff-split-window-function 'split-window-horizontally
+              comint-process-echoes t ; so that shell doesn't repeat every command back to me
 
               ;; smooth scrolling
               scroll-step                1
@@ -43,16 +44,8 @@
 ;; open shells in current window
 (add-to-list 'display-buffer-alist '("^\\*shell\\*$" . (display-buffer-same-window)))
 
-;; default programs
-(setq python-shell-interpreter "ipython3"
-      python-shell-interpreter-args (concat "--no-confirm-exit"
-                                            (if (>= (string-to-number
-                                                     (shell-command-to-string "ipython3 --version"))
-                                                    5)
-                                                " --simple-prompt")))
-(when (string= (system-distro) "Fedora") (setq gnuplot-program "/usr/bin/gnuplot-qt"))
-
-;; ensure environment is consistent with login environment (ref http://stackoverflow.com/a/6415812)
+;; ensure environment is consistent with login environment
+;; (ref http://stackoverflow.com/a/6415812)
 (let ((path-from-shell (full-shell-command-to-clean-string "echo $PATH")))
   (setenv "PATH" path-from-shell)
   (setq eshell-path-env path-from-shell)
@@ -68,12 +61,14 @@
               f90-type-indent         2
               f90-program-indent      2
               f90-continuation-indent 4
-              js-indent-level 3
+              js-indent-level 2
               )
 (add-to-list 'completion-ignored-extensions ".mod")
 
 ;; python settings
 (setq-default python-indent-guess-indent-offset nil)
+(setq python-shell-interpreter "ipython3")
+(setq python-shell-interpreter-args "--no-confirm-exit --simple-prompt")
 
 ;; (use-package f90
 ;;   :mode ("\\.\\(F90\\|fpp\\)$" . f90-mode)
@@ -88,10 +83,10 @@
 ;;   )
 
 ;; line length settings
-(add-to-mode-hooks '(f90-mode c-mode c++-mode python-mode emacs-lisp-mode sh-mode markdown-mode
-                              arduino-mode) 'fci-mode)
+(add-to-mode-hooks '(f90-mode c-mode c++-mode python-mode emacs-lisp-mode sh-mode)
+                   'fci-mode)
 (setq-default fci-rule-color "dim gray"
-              fill-column 100
+              fill-column 98
               sentence-end-double-space nil)
 (setq-mode-default 'markdown-mode fill-column 80)
 (setq-mode-default 'org-mode fill-column 80)
@@ -101,8 +96,8 @@
 (setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
 
 ;; mode settings
-;; (add-hook 'prog-mode-hook
-;;           (lambda () (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)))
+(add-hook 'prog-mode-hook
+          (lambda () (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)))
 
 ;; is there a way to make C-e go to the actual end of the line in visual-line-mode??
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)    ; auto spell-checking in latex
@@ -154,6 +149,6 @@
 
 ;; could put these mode-specific types of shortcuts into a minor mode as well
 (modes-set-key '(f90-mode c-mode c++-mode arduino-mode) (kbd "C-c C-c") 'compile-in-dir)
-(mode-unset-key 'ibuffer-mode-hook (kbd "M-o")) ; instead of minor mode, manually overriding for now
+(mode-unset-key 'ibuffer-mode-hook (kbd "M-o")) ; should put in minor mode instead of override
 
 (provide 'init-config)
