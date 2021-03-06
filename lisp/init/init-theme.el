@@ -12,16 +12,6 @@
                             -id $(xprop -root | awk '/^_NET_ACTIVE_WINDOW/ {print $5}')")))
 (add-hook 'after-make-frame-functions 'dark-window-border t)
 
-;; select the font size based on screen size and resolution
-(defun font-size ()
-  (let ((mm-width (nth 1 (assoc 'mm-size (frame-monitor-attributes)))))
-  (if (>= mm-width 600)
-      11
-    (cond
-     ((<= (display-pixel-width) 1366)  9)
-     ((>= (display-pixel-width) 2560) 15)
-     (t 11)))))
-
 ;; define a function to set the theme based on the mode (gui/console)
 ;; and load it every time we open a new frame
 (defun set-theme (&optional frame)
@@ -29,7 +19,8 @@
   (load-theme 'ample t)
   (if (window-system frame)
       (progn
-        (set-frame-font (concat "DejaVu Sans Mono " (number-to-string (font-size))))
+        (set-frame-font "DejaVu Sans Mono 10")
+        (set-face-attribute 'default (selected-frame) :height 105)
         (powerline-default-theme))
     (progn
       ;;(disable-theme 'ample) ;; in case it was active
