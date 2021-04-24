@@ -25,6 +25,7 @@
               compile-command "make -j8 "
               ediff-split-window-function 'split-window-horizontally
               comint-process-echoes t ; so that shell doesn't repeat every command back to me
+              shell-command-switch "-ic" ; use interactive shell so bashrc is loaded
 
               ;; smooth scrolling
               scroll-step                1
