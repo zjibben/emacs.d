@@ -62,7 +62,7 @@
               f90-type-indent         2
               f90-program-indent      2
               f90-continuation-indent 4
-              js-indent-level 2
+              js-indent-level         2
               )
 (add-to-list 'completion-ignored-extensions ".mod")
 
@@ -87,7 +87,7 @@
 (add-to-mode-hooks '(f90-mode c-mode c++-mode python-mode emacs-lisp-mode sh-mode)
                    'fci-mode)
 (setq-default fci-rule-color "dim gray"
-              fill-column 98
+              fill-column 100
               sentence-end-double-space nil)
 (setq-mode-default 'markdown-mode fill-column 80)
 (setq-mode-default 'org-mode fill-column 80)
@@ -98,7 +98,7 @@
 
 ;; mode settings
 (add-hook 'prog-mode-hook
-          (lambda () (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)))
+          (lambda () (add-hook 'before-save-hook 'whitespace-cleanup nil t)))
 
 ;; is there a way to make C-e go to the actual end of the line in visual-line-mode??
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)    ; auto spell-checking in latex
@@ -126,6 +126,7 @@
 (add-all-to-list 'auto-mode-alist
                  '("\\.\\(F90\\|fpp\\)$" . f90-mode)
                  '(".cu$" . c++-mode)
+                 '(".h$" . c++-mode)
                  '(".cl$" . c-mode)
                  '(".m$" . octave-mode)
                  '(".pdf$" . pdf-view-mode))
@@ -136,6 +137,7 @@
 ;;       http://stackoverflow.com/questions/683425/globally-override-key-binding-in-emacs
 ;;       for now, just manually override major mode settings that don't respect these
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
+(global-set-key (kbd "C-x M-e") 'apply-macro-to-region-lines)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "M-o") 'next-multiframe-window)
 (global-set-key (kbd "M-O") 'previous-multiframe-window)
