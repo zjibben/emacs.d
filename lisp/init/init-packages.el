@@ -3,13 +3,13 @@
 ;; initialize repositories and packages
 
 ;; add repos
-;; LANL proxy doesn't like some https, so need to use http when behind it
-(add-to-list 'package-archives
-             `("melpa" . ,(if proxy-enable "http://melpa.org/packages/"
-                            "https://melpa.org/packages/")))
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 ;; install missing packages
 (require 'init-install-packages)
+
+(require 'dockerfile-mode)
 
 ;; configure installed packages
 ;; AUCTeX

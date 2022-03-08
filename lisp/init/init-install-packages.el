@@ -11,12 +11,13 @@
         auctex
         cmake-mode
         djvu
+	dockerfile-mode
         eimp
         elpy
         ;;ein
         fill-column-indicator
         flx-ido
-        gnuplot-mode
+        ;;gnuplot-mode
         haskell-mode
         julia-mode
         lua-mode
