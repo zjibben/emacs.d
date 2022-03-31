@@ -11,8 +11,9 @@
         auctex
         cmake-mode
         djvu
-	dockerfile-mode
+        dockerfile-mode
         eimp
+        ein
         elpy
         ;;ein
         fill-column-indicator
