@@ -48,6 +48,7 @@
 ;; (global-set-key (kbd "C-M-r") 'isearch-backward)
 
 ;; ivy =================================
+;; TODO -- don't want fuzzy search for swiper
 (ivy-mode 1)
 (counsel-mode 1)
 (setq-default ivy-use-virtual-buffers t
@@ -56,7 +57,6 @@
               )
 
 ;; ido-style folder navigation
-;; TODO -- still need to make it so I can easily add new files inside new directories.
 (define-key ivy-minibuffer-map (kbd "C-j") #'ivy-immediate-done)
 (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
 
