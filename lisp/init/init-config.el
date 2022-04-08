@@ -24,13 +24,16 @@
               enable-remote-dir-locals            t
               compile-command "make -j8 "
               ediff-split-window-function 'split-window-horizontally
+
               comint-process-echoes t ; so that shell doesn't repeat every command back to me
+              comint-terminfo-terminal "ansi"
               shell-command-switch "-ic" ; use interactive shell so bashrc is loaded
 
               ;; smooth scrolling
               scroll-step                1
               scroll-conservatively      10000
               mouse-wheel-scroll-amount '(1 ((shift) . 1)) )
+
 (ido-mode           1) ; enable ido-mode for switching buffers and finding files
 (flx-ido-mode       1)
 (display-time-mode  1) ; activate modeline time and date

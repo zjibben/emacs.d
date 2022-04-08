@@ -108,7 +108,9 @@ in last given directory. If given a non-nil argument
 
     (if (or get-new-directory (not compile-in-dir--dir))
         ;; the default-directory variable is used internally in 'compile
-        (let ((default-directory (setq compile-in-dir--dir (read-directory-name "In directory: "))))
+        (let ((default-directory (setq compile-in-dir--dir (read-directory-name "In directory: ")))
+              (comint-terminfo-terminal "dumb")
+              )
           (call-interactively 'compile))
       (recompile))
 
