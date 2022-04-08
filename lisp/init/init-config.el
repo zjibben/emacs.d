@@ -153,7 +153,6 @@
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 (global-set-key (kbd "<f1>") 'create-shell)
 (global-set-key (kbd "<f2>") 'create-python-shell)
-(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; could put these mode-specific types of shortcuts into a minor mode as well
 (modes-set-key '(f90-mode c-mode c++-mode arduino-mode) (kbd "C-c C-c") 'compile-in-dir)

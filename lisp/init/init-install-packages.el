@@ -13,9 +13,8 @@
         djvu
         dockerfile-mode
         eimp
-        ein
-        elpy
         ;;ein
+        elpy
         fill-column-indicator
         flx-ido
         ;;gnuplot-mode
@@ -37,10 +36,11 @@
         use-package
         wordnut
         yaml-mode
+        vterm
         ))
 
 ;; install all the above packages, updating the package archive if necessary
 (package-refresh-contents)
-(package-install-selected-packages)
+(package-install-selected-packages t)
 
 (provide 'init-install-packages)

@@ -42,8 +42,13 @@
   (compile "make upload")
   (pop-to-buffer "*compilation*"))
 
-;; gpg stuff
-(pinentry-start)
+(pinentry-start) ;; gpg stuff
+;;(elpy-enable)
+
+
+;; magit
+;; override the default
+(global-set-key (kbd "C-c g") 'magit-file-dispatch)
 
 ;; mu4e
 ;; mu needs to be separately installed, so don't fail if mu4e isn't found
