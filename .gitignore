@@ -8,6 +8,7 @@ tutorial
 transient
 bak
 request
+.lsp-session*
 
 # files
 *~
@@ -18,3 +19,4 @@ tramp
 abbrev_defs
 ido.last
 smex-items
+recentf

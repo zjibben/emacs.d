@@ -11,11 +11,7 @@
               Info-fontify-maximum-menu-size      1000000 ; increase Info highlight limit
               shift-select-mode                   nil     ; shift/caps won't select text
               save-interprogram-paste-before-kill t       ; don't lose clipboard entries
-              ido-everywhere                      t
-              ido-enable-flex-matching            t
-              ido-ignore-extensions               t     ; ido ignores extensions like '~' and '.o'
-              ido-use-faces                       nil     ; use flx highlights
-              ido-default-buffer-method           'selected-window
+
               completions-format                  'vertical ; sort along columns rather than rows
               show-paren-delay                    0       ; show matching parentheses immediately
               proced-auto-update-flag             t
@@ -32,10 +28,80 @@
               ;; smooth scrolling
               scroll-step                1
               scroll-conservatively      10000
-              mouse-wheel-scroll-amount '(1 ((shift) . 1)) )
+              mouse-wheel-scroll-amount '(1 ((shift) . 1))
+              )
 
-(ido-mode           1) ; enable ido-mode for switching buffers and finding files
-(flx-ido-mode       1)
+;; ;; ido
+;; (setq-default ido-everywhere                      t
+;;               ido-enable-flex-matching            t
+;;               ido-ignore-extensions               t     ; ido ignores extensions like '~' and '.o'
+;;               ido-use-faces                       nil     ; use flx highlights
+;;               ido-default-buffer-method           'selected-window)
+;; (ido-mode           1) ; enable ido-mode for switching buffers and finding files
+;; (flx-ido-mode       1)
+;; (smex-initialize)
+;; (global-set-key (kbd "M-x") 'smex)
+;; (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+;; (global-set-key (kbd "C-s") 'isearch-forward-regexp)
+;; (global-set-key (kbd "C-r") 'isearch-backward-regexp)
+;; (global-set-key (kbd "C-M-s") 'isearch-forward)
+;; (global-set-key (kbd "C-M-r") 'isearch-backward)
+
+;; ivy =================================
+(ivy-mode 1)
+(counsel-mode 1)
+(setq-default ivy-use-virtual-buffers t
+              ivy-re-builders-alist   '((t . ivy--regex-fuzzy)
+                                        )
+              )
+
+;; ido-style folder navigation
+;; TODO -- still need to make it so I can easily add new files inside new directories.
+(define-key ivy-minibuffer-map (kbd "C-j") #'ivy-immediate-done)
+(define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
+
+;; Ivy-based interface to standard commands
+(global-set-key (kbd "C-s") 'swiper-isearch)
+;; (global-set-key (kbd "M-x") 'counsel-M-x)
+;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+;; (global-set-key (kbd "M-y") 'counsel-yank-pop)
+;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+;; (global-set-key (kbd "<f1> l") 'counsel-find-library)
+;; (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+;; (global-set-key (kbd "<f2> j") 'counsel-set-variable)
+;; (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
+(global-set-key (kbd "C-c v") 'ivy-push-view)
+(global-set-key (kbd "C-c V") 'ivy-pop-view)
+
+;; ;; Ivy-based interface to shell and system tools
+;; (global-set-key (kbd "C-c c") 'counsel-compile)
+;; (global-set-key (kbd "C-c g") 'counsel-git)
+;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
+;; (global-set-key (kbd "C-c L") 'counsel-git-log)
+;; (global-set-key (kbd "C-c k") 'counsel-rg)
+;; (global-set-key (kbd "C-c m") 'counsel-linux-app)
+;; (global-set-key (kbd "C-c n") 'counsel-fzf)
+;; (global-set-key (kbd "C-x l") 'counsel-locate)
+;; (global-set-key (kbd "C-c J") 'counsel-file-jump)
+;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+;; (global-set-key (kbd "C-c w") 'counsel-wmctrl)
+
+;; ;; Ivy-resume and other commands
+;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
+;; (global-set-key (kbd "C-c b") 'counsel-bookmark)
+;; (global-set-key (kbd "C-c d") 'counsel-descbinds)
+;; (global-set-key (kbd "C-c g") 'counsel-git)
+;; (global-set-key (kbd "C-c o") 'counsel-outline)
+;; (global-set-key (kbd "C-c t") 'counsel-load-theme)
+;; (global-set-key (kbd "C-c F") 'counsel-org-file)
+
+(require 'lsp-mode)
+(add-hook 'c++-mode-hook #'lsp)
+
+;; ==============================
+
 (display-time-mode  1) ; activate modeline time and date
 (menu-bar-mode     -1) ; deactivate menubar
 (tool-bar-mode     -1) ; deactivate toolbar
@@ -147,10 +213,6 @@
 (global-set-key (kbd "M-o") 'next-multiframe-window)
 (global-set-key (kbd "M-O") 'previous-multiframe-window)
 (global-set-key (kbd "M-Y") (lambda () (interactive) (yank-pop -1)))
-(global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key (kbd "C-M-s") 'isearch-forward)
-(global-set-key (kbd "C-M-r") 'isearch-backward)
 (global-set-key (kbd "<f1>") 'create-shell)
 (global-set-key (kbd "<f2>") 'create-python-shell)
 

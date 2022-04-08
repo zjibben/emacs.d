@@ -37,6 +37,13 @@
         wordnut
         yaml-mode
         vterm
+
+        counsel
+        counsel-etags
+        lsp-mode
+        flycheck
+        lsp-ivy
+        company
         ))
 
 ;; install all the above packages, updating the package archive if necessary
