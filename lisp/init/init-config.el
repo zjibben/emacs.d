@@ -48,12 +48,14 @@
 ;; (global-set-key (kbd "C-M-r") 'isearch-backward)
 
 ;; ivy =================================
-;; TODO -- don't want fuzzy search for swiper
+;; TODO -- find file should ignore files ending in ~ or .o, and temporary files #...#
 (ivy-mode 1)
 (counsel-mode 1)
 (setq-default ivy-use-virtual-buffers t
-              ivy-re-builders-alist   '((t . ivy--regex-fuzzy)
-                                        )
+              ivy-re-builders-alist '((swiper-isearch . ivy--regex)
+                                      (t              . ivy--regex-fuzzy)
+                                     )
+              counsel-find-file-ignore-regexp "\(?:\‘[#.]\)\|\(?:[#~]\’\)"
               )
 
 ;; ido-style folder navigation
@@ -62,6 +64,7 @@
 
 ;; Ivy-based interface to standard commands
 (global-set-key (kbd "C-s") 'swiper-isearch)
+(global-set-key (kbd "C-r") 'swiper-isearch-backward)
 ;; (global-set-key (kbd "M-x") 'counsel-M-x)
 ;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 ;; (global-set-key (kbd "M-y") 'counsel-yank-pop)
