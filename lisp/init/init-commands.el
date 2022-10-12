@@ -129,4 +129,20 @@ in last given directory. If given a non-nil argument
   (org-return-indent)
   (org-open-line 1))
 
+
+(defun clang-format-for-tab ()
+  (interactive)
+  (clang-format (point) (point))
+  (only-forward-to-indentation))
+
+
+(defun only-forward-to-indentation ()
+  "Move back-to-indentation if the first whitespace is forward.
+This is used to replicate the behavior of TAB. Ignores all
+arguments."
+  (interactive)
+  (if (> (save-excursion (back-to-indentation) (current-column))
+         (current-column))
+      (back-to-indentation)))
+
 (provide 'init-commands)

@@ -41,6 +41,7 @@
         counsel
         counsel-etags
         lsp-mode
+        clang-format
         flycheck
         lsp-ivy
         company

@@ -103,6 +103,14 @@
 (require 'lsp-mode)
 (add-hook 'c++-mode-hook #'lsp)
 
+(require 'clang-format)
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (fset 'c-indent-region 'clang-format-region)
+            (fset 'c-indent-line-or-region 'clang-format-for-tab)
+            (c-set-offset 'innamespace [0])))
+
+
 ;; ==============================
 
 (display-time-mode  1) ; activate modeline time and date
