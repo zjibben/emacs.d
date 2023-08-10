@@ -134,7 +134,7 @@
 (setenv "INSIDE_EMACS" (format "%s,comint" emacs-version)) ; needed by pinentry
 
 ;; make tramp respect remote PATH variable
-(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+(with-eval-after-load "tramp" (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
 ;; fortran settings
 (setq-default f90-do-indent           2
@@ -187,7 +187,7 @@
 (add-hook 'LaTeX-mode-hook (lambda () (add-all-to-list 'prettify-symbols-alist
                                                        '("\\varphi" . ?φ)
                                                        '("\\phi" . ?ϕ)
-                                                       '("\\right)" . ?)) '("\\left(" . ?())))
+                                                       '("\\right)" . ?\)) '("\\left(" . ?\())))
 ;;(add-hook 'LaTeX-mode-hook 'visual-line-mode) ; break lines between words
 
 

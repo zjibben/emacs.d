@@ -5,12 +5,12 @@
 ;;(setq color-theme-is-global nil) ;; only for color-theme package?
 
 ;; give emacs a dark window
-(defun dark-window-border (&optional frame)
-  (if frame (select-frame frame))
-  (if (window-system frame)
-      (shell-command "xprop -f _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT 'dark' \
-                            -id $(xprop -root | awk '/^_NET_ACTIVE_WINDOW/ {print $5}')")))
-(add-hook 'after-make-frame-functions 'dark-window-border t)
+;; (defun dark-window-border (&optional frame)
+;;   (if frame (select-frame frame))
+;;   (if (window-system frame)
+;;       (shell-command "xprop -f _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT 'dark' \
+;;                             -id $(xprop -root | awk '/^_NET_ACTIVE_WINDOW/ {print $5}')")))
+;; (add-hook 'after-make-frame-functions 'dark-window-border t)
 
 ;; define a function to set the theme based on the mode (gui/console)
 ;; and load it every time we open a new frame
