@@ -57,4 +57,33 @@
       mu4e-update-interval  600
       message-send-mail-function 'smtpmail-send-it)
 
+;; AI stuff
+(use-package gptel
+  :ensure t
+  :config
+  (setq gptel-model   'deepseek/deepseek-r1-0528:free
+        gptel-backend
+        (gptel-make-openai "OpenRouter"
+                           :host "openrouter.ai"
+                           :endpoint "/api/v1/chat/completions"
+                           :stream t
+                           :key (openrouter-api-key)
+                           :models '(deepseek/deepseek-r1-0528:free
+                                     openai/gpt-oss-120b
+                                     google/gemini-2.5-flash
+                                     openai/o4-mini-high
+                                     anthropic/claude-sonnet-4
+                                     ))))
+
+(use-package aidermacs
+  :ensure t
+  :bind (("C-c a" . aidermacs-transient-menu))
+  :config
+  ; Set API_KEY in .bashrc, that will automatically picked up by aider or in elisp
+  (setenv "OPENROUTER_API_KEY" (openrouter-api-key))
+  :custom
+  ; See the Configuration section below
+  (aidermacs-default-chat-mode 'architect)
+  (aidermacs-default-model "openrouter/deepseek/deepseek-r1-0528:free"))
+
 (provide 'init-packages)

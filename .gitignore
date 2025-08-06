@@ -9,14 +9,17 @@ transient
 bak
 request
 .lsp-session*
+org-persist
 
 # files
 *~
 *\#*
-lisp/init/init-private-info.el
+lisp/init/init-secrets.el
 session.*
 tramp
 abbrev_defs
 ido.last
 smex-items
 recentf
+.aider*
+network-security.data
