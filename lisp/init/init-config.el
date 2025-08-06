@@ -102,6 +102,7 @@
 
 (require 'lsp-mode)
 (add-hook 'c++-mode-hook #'lsp)
+(setq-default lsp-enable-semantic-highlighting nil)
 
 (require 'clang-format)
 (add-hook 'c++-mode-hook
@@ -149,6 +150,7 @@
 ;; python settings
 (setq-default python-indent-guess-indent-offset nil)
 (setq python-shell-interpreter "ipython3")
+(setq python-shell-completion-native-enable nil)
 (setq python-shell-interpreter-args "--no-confirm-exit --simple-prompt")
 
 ;; (use-package f90
@@ -218,7 +220,7 @@
 ;;       as well as easily override major mode settings. Follow directions here:
 ;;       http://stackoverflow.com/questions/683425/globally-override-key-binding-in-emacs
 ;;       for now, just manually override major mode settings that don't respect these
-(global-set-key (kbd "C-x C-k") 'kill-this-buffer)
+(global-set-key (kbd "C-x C-k") 'kill-current-buffer)
 (global-set-key (kbd "C-x M-e") 'apply-macro-to-region-lines)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "M-o") 'next-multiframe-window)
