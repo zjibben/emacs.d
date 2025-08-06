@@ -120,8 +120,9 @@ in last given directory. If given a non-nil argument
   "Add an org log timestamp at point."
   (interactive)
   (org-insert-drawer nil "LOGBOOK")
-  (insert "- Created ")
+  (insert "- ")
   (org-insert-time-stamp (current-time) nil t)
+  (insert " Created")
   (org-up-element)
   (org-up-element)
   (org-cycle)
