@@ -13,3 +13,5 @@
           (set-face-attribute 'default (selected-frame) :height 105)))
   ('darwin
    (set-frame-font "Menlo 14")))
+
+(add-to-list 'default-frame-alist '(width . 102))

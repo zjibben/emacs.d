@@ -12,8 +12,8 @@
 ;;                             -id $(xprop -root | awk '/^_NET_ACTIVE_WINDOW/ {print $5}')")))
 ;; (add-hook 'after-make-frame-functions 'dark-window-border t)
 
-(use-package ample-theme :ensure t :defer t)
-(use-package powerline :ensure t)
+(use-package ample-theme)
+(use-package powerline)
 
 (defun set-theme-for-frame (frame)
   "Define a function to set the theme based on the mode (gui/console) and
@@ -46,12 +46,12 @@ load it every time we open a new frame."
 
     (display-splash-screen)))
 
+(add-hook 'after-make-frame-functions #'raise-frame) ; automatically focus new frames
 (add-hook 'after-make-frame-functions #'set-theme-for-frame)
 ;;(when (daemonp) (add-hook 'server-after-make-frame-hook #'set-theme-for-frame))
 (unless (daemonp) (set-theme-for-frame (selected-frame)))
 
 ;; (use-package telephone-line
-;;   :ensure t
 ;;   :config
 ;;   (defface my-telephone-line-accent-active
 ;;     '((t (:foreground "#bdbdb3" :background "grey22" :inherit mode-line))) "")

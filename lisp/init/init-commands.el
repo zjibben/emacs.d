@@ -15,6 +15,8 @@
   "Return the hook for a given mode."
   (intern (concat (symbol-name mode) "-hook")))
 
+;; this is a replacement for commands of the type:
+;; (add-hook 'f90-mode-hook 'fci-mode)
 (defun add-to-mode-hooks (modes func)
   "Add a function to many mode hooks."
   (dolist (mode modes) (add-hook (hook-from-mode mode) func)))
@@ -71,10 +73,10 @@
   (interactive)
   (shell (generate-new-buffer-name "*shell*")))
 
-(require 'python)
 (defun create-python-shell ()
   "Open a new Python shell buffer."
   (interactive)
+  (use-package python :demand t)
 
   ;; for some reason, if the current buffer is a python shell, creating a new
   ;; shell screws up existing ones. switch to temp buffer before making the new one.
@@ -115,35 +117,5 @@ in last given directory. If given a non-nil argument
       (recompile))
 
     (pop-to-buffer "*compilation*")))
-
-(defun create-org-log ()
-  "Add an org log timestamp at point."
-  (interactive)
-  (org-insert-drawer nil "LOGBOOK")
-  (insert "- ")
-  (org-insert-time-stamp (current-time) nil t)
-  (insert " Created")
-  (org-up-element)
-  (org-up-element)
-  (org-cycle)
-  (next-line)
-  (org-return-indent)
-  (org-open-line 1))
-
-
-(defun clang-format-for-tab ()
-  (interactive)
-  (clang-format (point) (point))
-  (only-forward-to-indentation))
-
-
-(defun only-forward-to-indentation ()
-  "Move back-to-indentation if the first whitespace is forward.
-This is used to replicate the behavior of TAB. Ignores all
-arguments."
-  (interactive)
-  (if (> (save-excursion (back-to-indentation) (current-column))
-         (current-column))
-      (back-to-indentation)))
 
 (provide 'init-commands)

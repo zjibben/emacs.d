@@ -35,9 +35,9 @@
 
 ;; fortran settings
 (setq-default f90-do-indent           2
-	      f90-if-indent           2
-	      f90-type-indent         2
-	      f90-program-indent      2
+              f90-if-indent           2
+              f90-type-indent         2
+              f90-program-indent      2
               f90-continuation-indent 4)
 
 ;; set file ending defaults
