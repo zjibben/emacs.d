@@ -3,61 +3,115 @@
 ;; initialize repositories and packages
 
 ;; add repos
-(require 'package)
+;;(require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
-;; install missing packages
-(require 'init-install-packages)
+;; these packages need to be organized somewhere
+(use-package adaptive-wrap :ensure t)
+(use-package fill-column-indicator :ensure t)
+(use-package flx-ido :ensure t)
+;;(use-package multi-term :ensure t)
+(use-package smex :ensure t)
+(use-package wordnut :ensure t)
+(use-package vterm :ensure t)
+(use-package counsel :ensure t)
+(use-package counsel-etags :ensure t)
+(use-package flycheck :ensure t)
+(use-package lsp-ivy :ensure t)
+(use-package company :ensure t)
 
-(require 'dockerfile-mode)
+;; add new modes
+(use-package dockerfile-mode :ensure t)
+(use-package yaml-mode :ensure t)
+(use-package rust-mode :ensure t :defer t)
+;(use-package arduino-mode :ensure t :defer t)
+(use-package cmake-mode :ensure t)
+(use-package haskell-mode :ensure t)
+(use-package julia-mode :ensure t)
+(use-package lua-mode :ensure t)
+(use-package markdown-mode :ensure t)
+(use-package typescript-mode :ensure t)
+(use-package pkgbuild-mode :ensure t :defer t)
+(use-package powershell :ensure t :defer t)
+;(use-package gnuplot-mode :ensure t)
+(use-package plantuml-mode
+  :ensure t
+  :defer t
+  :config
+  (setq-default plantuml-jar-path (pcase (system-distro)
+                                    ("Arch" "/opt/plantuml/plantuml.jar")
+                                    ("Fedora" "/usr/share/java/plantuml.jar"))))
+;; latex, pdfs, images, and djvu
+(use-package djvu :ensure t :defer t)
 
-;; configure installed packages
-;; AUCTeX
-(setq         TeX-auto-save   t
-              TeX-parse-self  t)
-(setq-default TeX-master      nil
-              TeX-engine     'xetex)
+(use-package auctex
+  :ensure t
+  :defer t
+  :config
+  (setq         TeX-auto-save   t
+                TeX-parse-self  t)
+  (setq-default TeX-master      nil
+                TeX-engine     'xetex))
+
+(use-package pdf-tools
+  :ensure t
+  :defer t
+  :config
+  (pdf-tools-install t nil t))
+
+(use-package eimp
+  :ensure t
+  :defer t
+  :config
+  (add-hook 'image-mode-hook  'eimp-mode)
+  ;;(add-hook 'eimp-mode-hook  'eimp-fit-image-to-window)
+  )
 
 
-(pdf-tools-install t nil t)
 
-;; plantuml-mode
-(setq-default plantuml-jar-path (pcase (system-distro)
-                                  ("Arch" "/opt/plantuml/plantuml.jar")
-                                  ("Fedora" "/usr/share/java/plantuml.jar")))
+(use-package magit
+  :ensure t
+  :config
+  (global-set-key (kbd "C-c g") 'magit-file-dispatch))
 
-;; eimp (fit images to window by default)
-(add-hook 'image-mode-hook  'eimp-mode)
-;(add-hook 'eimp-mode-hook  'eimp-fit-image-to-window)
+(use-package pinentry ; for gpg
+  :ensure t
+  :config
+  (pinentry-start))
 
-;; arduino-mode
-(defun arduino-compile ()
-  "Compile Arduino program and upload."
-  (interactive)
-  (compile "make upload")
-  (pop-to-buffer "*compilation*"))
+;; python
+;;(use-package ein :ensure t)
 
-(pinentry-start) ;; gpg stuff
-;;(elpy-enable)
+(use-package python-info :ensure t :defer t)
 
+(use-package elpy
+  :ensure t
+  :defer t
+  :config
+  (elpy-enable))
 
-;; magit
-;; override the default
-(global-set-key (kbd "C-c g") 'magit-file-dispatch)
+;; IDE & autocompletion stuff
+(use-package lsp-mode
+  :ensure t
+  :config
+  (add-hook 'c++-mode-hook #'lsp)
+  (setq-default lsp-enable-semantic-highlighting nil))
 
-;; mu4e
-;; mu needs to be separately installed, so don't fail if mu4e isn't found
-;; system/user-dependent material is initialized in init-private-info.el
-(if (string-match ".*\.lanl\.gov" system-name)
-    (add-to-list 'load-path "~/opt/mu/share/emacs/site-lisp/mu4e"))
-(require 'mu4e nil t)
-(require 'mu4e-contrib nil t)
-(setq mu4e-html2text-command 'mu4e-shr2text
-      mu4e-get-mail-command "offlineimap"
-      mu4e-update-interval  600
-      message-send-mail-function 'smtpmail-send-it)
+(use-package clang-format
+  :ensure t
+  :config
+  (add-hook 'c++-mode-hook
+            (lambda ()
+              (fset 'c-indent-region 'clang-format-region)
+              (fset 'c-indent-line-or-region 'clang-format-for-tab)
+              (c-set-offset 'innamespace [0]))))
+
+(use-package yasnippet :ensure t)
+(use-package yasnippet-snippets :ensure t)
 
 ;; AI stuff
+;;(use-package ellama :ensure t)
+
 (use-package gptel
   :ensure t
   :config
@@ -77,12 +131,12 @@
 
 (use-package aidermacs
   :ensure t
+  :defer t
   :bind (("C-c a" . aidermacs-transient-menu))
   :config
-  ; Set API_KEY in .bashrc, that will automatically picked up by aider or in elisp
   (setenv "OPENROUTER_API_KEY" (openrouter-api-key))
   :custom
-  ; See the Configuration section below
+  ;; See the Configuration section below
   (aidermacs-default-chat-mode 'architect)
   (aidermacs-default-model "openrouter/deepseek/deepseek-r1-0528:free"))
 

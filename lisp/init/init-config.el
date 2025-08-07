@@ -100,17 +100,6 @@
 ;; (global-set-key (kbd "C-c t") 'counsel-load-theme)
 ;; (global-set-key (kbd "C-c F") 'counsel-org-file)
 
-(require 'lsp-mode)
-(add-hook 'c++-mode-hook #'lsp)
-(setq-default lsp-enable-semantic-highlighting nil)
-
-(require 'clang-format)
-(add-hook 'c++-mode-hook
-          (lambda ()
-            (fset 'c-indent-region 'clang-format-region)
-            (fset 'c-indent-line-or-region 'clang-format-for-tab)
-            (c-set-offset 'innamespace [0])))
-
 ;; ==============================
 (display-time-mode 1) ; activate modeline time and date
 (show-paren-mode 1) ; activate matching parenthesis highlighting
@@ -161,7 +150,7 @@
 ;;   )
 
 ;; line length settings
-(add-to-mode-hooks '(f90-mode c-mode c++-mode python-mode emacs-lisp-mode sh-mode)
+(add-to-mode-hooks '(f90-mode c-mode c++-mode python-mode emacs-lisp-mode sh-mode html-mode)
                    'fci-mode)
 (setq-default fci-rule-color "dim gray"
               fill-column 100
