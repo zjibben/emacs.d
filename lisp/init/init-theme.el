@@ -19,9 +19,15 @@
   (load-theme 'ample t)
   (if (window-system frame)
       (progn
-        (set-frame-font "DejaVu Sans Mono 10")
-        (set-face-attribute 'default (selected-frame) :height 105)
-        (powerline-default-theme))
+        (pcase system-type
+          ('gnu/linux
+           (progn (set-frame-font "DejaVu Sans Mono 10")
+                  (set-face-attribute 'default (selected-frame) :height 105)))
+          ('darwin
+           (set-frame-font "Menlo 14")))
+        (powerline-default-theme)
+        ;;(telephone-line-mode t)
+        )
     (progn
       ;;(disable-theme 'ample) ;; in case it was active
       (set-face-background 'default "unspecified-bg" (selected-frame)) ;; terminal sets bg color
@@ -39,6 +45,30 @@
                       :foreground "lemon chiffon"
                       :background "default")
   )
+
+;; ;; telephone line settings
+;; (use-package telephone-line
+;;   :ensure t
+;;   :config
+;;   (defface my-telephone-line-accent-active
+;;     '((t (:foreground "#bdbdb3" :background "grey22" :inherit mode-line))) "")
+;;   (defface my-telephone-line-accent-inactive
+;;     '((t (:foreground "#bdbdb3" :background "grey11" :inherit mode-line-inactive))) "")
+;;   (setq telephone-line-faces
+;;         '((accent . (my-telephone-line-accent-active . my-telephone-line-accent-inactive))
+;;           (nil . (mode-line . mode-line-inactive))))
+
+;;   (setq telephone-line-lhs
+;;         '((nil   . (telephone-line-buffer-segment
+;;                     telephone-line-process-segment))
+;;           (accent . (telephone-line-major-mode-segment))
+;;           (nil    . (telephone-line-vc-segment
+;;                                         ;telephone-line-erc-modified-channels-segment
+;;                      ))))
+;;   (setq telephone-line-rhs
+;;         '((nil    . (telephone-line-misc-info-segment))
+;;           (accent . (telephone-line-minor-mode-segment))
+;;           (nil   . (telephone-line-airline-position-segment)))))
 
 ;; This is a workaround to a latency issue I was experiencing. Typing or moving
 ;; the cursor or changing windows would incur random latency, especially when
