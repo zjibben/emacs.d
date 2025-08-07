@@ -24,6 +24,12 @@ load it every time we open a new frame."
         (progn
           (load-theme 'ample t)
           (powerline-default-theme)
+          (pcase system-type
+            ('gnu/linux
+             (progn (set-frame-font "DejaVu Sans Mono 10")
+                    (set-face-attribute 'default (selected-frame) :height 105)))
+            ('darwin
+             (set-frame-font "Menlo 14")))
           ;;(telephone-line-mode t)
           )
 

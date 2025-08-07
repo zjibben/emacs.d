@@ -60,10 +60,13 @@
 (add-to-list 'completion-ignored-extensions ".mod")
 
 ;; python settings
-(setq-default python-indent-guess-indent-offset nil)
-(setq python-shell-interpreter "ipython3")
-(setq python-shell-completion-native-enable nil)
-(setq python-shell-interpreter-args "--no-confirm-exit --simple-prompt")
+(when (eq system-type 'darwin)
+  (setq-default python-shell-virtualenv-root
+                (concat "/Users/" (user-login-name) "/python-venv/main")))
+(setq-default python-indent-guess-indent-offset nil
+              python-shell-interpreter "ipython3"
+              python-shell-completion-native-enable nil
+              python-shell-interpreter-args "--no-confirm-exit --simple-prompt")
 
 ;; (use-package f90
 ;;   :mode ("\\.\\(F90\\|fpp\\)$" . f90-mode)
