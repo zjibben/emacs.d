@@ -37,10 +37,19 @@
   (set-face-attribute 'show-paren-match nil
                       :weight     'normal
                       :foreground "lemon chiffon"
-                      :background "default"))
+                      :background "default")
+  )
 
+;; This is a workaround to a latency issue I was experiencing. Typing or moving
+;; the cursor or changing windows would incur random latency, especially when
+;; typing individual characters slowly, one at a time, and especially when
+;; putting Emacs in fullscreen on X. Seemed to disappear on Wayland. Found
+;; solutions suggested here:
+;; https://www.reddit.com/r/emacs/comments/zgp6kw/gui_emacs_weird_the_bigger_the_frame_size_is_the/
+;; https://github.com/doomemacs/doomemacs/issues/2217
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
-(add-hook 'after-make-frame-functions 'set-theme t) ;; append
+(add-hook 'after-make-frame-functions 'set-theme t)
 (set-theme) ;; run manually for non-server/client mode
 
 ;; set color for highlighting current line
