@@ -84,7 +84,9 @@
 (add-to-mode-hooks '(prog-mode rst-mode markdown-mode)
                    (lambda () (add-hook 'before-save-hook #'whitespace-cleanup nil t)))
 (add-to-mode-hooks '(prog-mode rst-mode markdown-mode)
-                   (lambda () (add-hook 'before-save-hook #'untabify nil t)))
+                   (lambda () (add-hook 'before-save-hook
+                                        (lambda () (untabify (point-min) (point-max)))
+                                        nil t)))
 (add-hook 'rst-mode-hook #'flyspell-mode)
 
 (use-package org
@@ -93,7 +95,7 @@
   (add-hook 'org-mode-hook #'flyspell-mode)             ; auto spell-checking in org
   (add-hook 'org-mode-hook #'visual-line-mode)          ; break lines between words
   (add-hook 'org-mode-hook #'adaptive-wrap-prefix-mode) ; wraped headers are indented properly
-  (setq org-pretty-entities t)                         ; render math by default
+  (setq-default org-pretty-entities t)                  ; render math by default
   (setcar (nthcdr 4 org-emphasis-regexp-components) 20) ; emphasize up to 20 lines instead of 1
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 
@@ -116,6 +118,7 @@
                  '("\\.\\(F90\\|fpp\\)$" . f90-mode)
                  '(".cu$" . c++-mode)
                  '(".h$" . c++-mode)
+                 '(".tpp$" . c++-mode)
                  '(".cl$" . c-mode)
                  '(".m$" . octave-mode)
                  '(".pdf$" . pdf-view-mode))
