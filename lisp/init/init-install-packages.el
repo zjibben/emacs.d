@@ -6,7 +6,6 @@
 (setq package-selected-packages
       '(
         adaptive-wrap
-        ample-theme
         arduino-mode
         auctex
         cmake-mode
@@ -28,7 +27,6 @@
         pinentry
         pkgbuild-mode
         plantuml-mode
-        powerline
         powershell
         python-info
         rust-mode

@@ -5,6 +5,6 @@
 
 (require 'init-secrets nil t)
 (require 'init-commands)
+(require 'init-theme)
 (require 'init-packages)
 (require 'init-config)
-(require 'init-theme)

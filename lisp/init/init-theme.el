@@ -12,41 +12,44 @@
 ;;                             -id $(xprop -root | awk '/^_NET_ACTIVE_WINDOW/ {print $5}')")))
 ;; (add-hook 'after-make-frame-functions 'dark-window-border t)
 
-;; define a function to set the theme based on the mode (gui/console)
-;; and load it every time we open a new frame
-(defun set-theme (&optional frame)
-  (if frame (select-frame frame))
-  (load-theme 'ample t)
-  (if (window-system frame)
+(use-package ample-theme :ensure t :defer t)
+(use-package powerline :ensure t)
+
+(defun set-theme-for-frame (frame)
+  "Define a function to set the theme based on the mode (gui/console) and
+load it every time we open a new frame."
+  (with-selected-frame frame
+    (if (display-graphic-p frame)
+        ;; GUI settings
+        (progn
+          (load-theme 'ample t)
+          (powerline-default-theme)
+          ;;(telephone-line-mode t)
+          )
+
+      ;; Terminal settings
       (progn
-        (pcase system-type
-          ('gnu/linux
-           (progn (set-frame-font "DejaVu Sans Mono 10")
-                  (set-face-attribute 'default (selected-frame) :height 105)))
-          ('darwin
-           (set-frame-font "Menlo 14")))
-        (powerline-default-theme)
-        ;;(telephone-line-mode t)
-        )
-    (progn
-      ;;(disable-theme 'ample) ;; in case it was active
-      (set-face-background 'default "unspecified-bg" (selected-frame)) ;; terminal sets bg color
-      (powerline-vim-theme) ) )
-  (display-splash-screen)
+        ;;(disable-theme 'ample) ;; in case it was active
+        (set-face-background 'default "unspecified-bg" (selected-frame)) ;; terminal sets bg color
+        (powerline-vim-theme)))
 
-  ;; fix issue where italics showing up as underlined
-  (set-face-attribute 'italic nil
-                      :slant 'italic
-                      :underline nil)
+    ;; fix issue where italics showing up as underlined
+    (set-face-attribute 'italic frame
+                        :slant 'italic
+                        :underline nil)
 
-  ;; matching parenthesis highlighting settings
-  (set-face-attribute 'show-paren-match nil
-                      :weight     'normal
-                      :foreground "lemon chiffon"
-                      :background "default")
-  )
+    ;; matching parenthesis highlighting settings
+    (set-face-attribute 'show-paren-match nil
+                        :weight     'normal
+                        :foreground "lemon chiffon"
+                        :background "default")
 
-;; ;; telephone line settings
+    (display-splash-screen)))
+
+(add-hook 'after-make-frame-functions #'set-theme-for-frame)
+;;(when (daemonp) (add-hook 'server-after-make-frame-hook #'set-theme-for-frame))
+(unless (daemonp) (set-theme-for-frame (selected-frame)))
+
 ;; (use-package telephone-line
 ;;   :ensure t
 ;;   :config
@@ -78,9 +81,6 @@
 ;; https://www.reddit.com/r/emacs/comments/zgp6kw/gui_emacs_weird_the_bigger_the_frame_size_is_the/
 ;; https://github.com/doomemacs/doomemacs/issues/2217
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
-
-(add-hook 'after-make-frame-functions 'set-theme t)
-(set-theme) ;; run manually for non-server/client mode
 
 ;; set color for highlighting current line
 ;;(custom-set-faces '(hl-line ((t (:background "gray9")))))

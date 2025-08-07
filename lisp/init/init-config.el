@@ -111,14 +111,9 @@
             (fset 'c-indent-line-or-region 'clang-format-for-tab)
             (c-set-offset 'innamespace [0])))
 
-
 ;; ==============================
-
-(display-time-mode  1) ; activate modeline time and date
-(menu-bar-mode     -1) ; deactivate menubar
-(tool-bar-mode     -1) ; deactivate toolbar
-(scroll-bar-mode   -1) ; deactivate scroll bar
-(show-paren-mode    1) ; activate matching parenthesis highlighting
+(display-time-mode 1) ; activate modeline time and date
+(show-paren-mode 1) ; activate matching parenthesis highlighting
 (defalias 'yes-or-no-p 'y-or-n-p) ; I don't like typing 2 or 3 characters when I can type 1
 (add-to-list 'default-frame-alist '(width . 102))
 (add-hook 'after-make-frame-functions 'raise-frame t) ; automatically focus new frames
