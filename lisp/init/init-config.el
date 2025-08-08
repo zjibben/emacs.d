@@ -72,13 +72,13 @@
 ;;   )
 
 ;; mode settings
-(add-to-mode-hooks '(prog-mode rst-mode markdown-mode)
+(add-hook 'rst-mode-hook #'flyspell-mode)
+(add-to-mode-hooks '(prog-mode rst-mode)
                    (lambda () (add-hook 'before-save-hook #'whitespace-cleanup nil t)))
-(add-to-mode-hooks '(prog-mode rst-mode markdown-mode)
+(add-to-mode-hooks '(prog-mode rst-mode)
                    (lambda () (add-hook 'before-save-hook
                                         (lambda () (untabify (point-min) (point-max)))
                                         nil t)))
-(add-hook 'rst-mode-hook #'flyspell-mode)
 
 (use-package org
   :config

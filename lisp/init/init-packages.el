@@ -112,6 +112,10 @@
   (setq-mode-default 'markdown-mode fill-column 99999999999999)
   (add-hook 'markdown-mode-hook #'flyspell-mode)
   (add-hook 'markdown-mode-hook #'visual-line-mode)
+  (add-hook 'markdown-mode-hook (lambda () (add-hook 'before-save-hook #'whitespace-cleanup nil t)))
+  (add-hook 'markdown-mode-hook (lambda () (add-hook 'before-save-hook
+                                                     (lambda () (untabify (point-min) (point-max)))
+                                                     nil t)))
   (setq-default markdown-command "pandoc")
   )
 (use-package typescript-mode)
