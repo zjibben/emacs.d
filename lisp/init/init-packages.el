@@ -246,19 +246,20 @@ arguments."
 
 (use-package gptel
   :config
-  (setq gptel-model   'deepseek/deepseek-r1-0528:free
-        gptel-backend
-        (gptel-make-openai "OpenRouter"
-          :host "openrouter.ai"
-          :endpoint "/api/v1/chat/completions"
-          :stream t
-          :key (openrouter-api-key)
-          :models '(deepseek/deepseek-r1-0528:free
-                    openai/gpt-oss-120b
-                    google/gemini-2.5-flash
-                    openai/o4-mini-high
-                    anthropic/claude-sonnet-4
-                    ))))
+  (setq-default gptel-model   'deepseek/deepseek-r1-0528:free
+                gptel-include-reasoning "*GPT Reasoning*"
+                gptel-backend
+                (gptel-make-openai "OpenRouter"
+                  :host "openrouter.ai"
+                  :endpoint "/api/v1/chat/completions"
+                  :stream t
+                  :key (openrouter-api-key)
+                  :models '(deepseek/deepseek-r1-0528:free
+                            openai/gpt-oss-120b
+                            google/gemini-2.5-flash
+                            openai/o4-mini-high
+                            anthropic/claude-sonnet-4
+                            ))))
 
 (use-package aidermacs
   :bind (("C-c a" . aidermacs-transient-menu))
