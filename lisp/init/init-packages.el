@@ -176,6 +176,34 @@
   :config
   (elpy-enable))
 
+(use-package python
+  :init
+  (when (eq system-type 'darwin)
+    (setq-default python-shell-virtualenv-root
+                  (concat "/Users/" (user-login-name) "/python-venv/main")))
+  (setq-default python-indent-guess-indent-offset nil
+                python-shell-interpreter "ipython3"
+                python-shell-completion-native-enable nil
+                python-shell-interpreter-args "--no-confirm-exit --simple-prompt")
+
+  (defun create-python-shell ()
+    "Open a new Python shell buffer."
+    (interactive)
+
+    ;; for some reason, if the current buffer is a python shell, creating a new
+    ;; shell screws up existing ones. switch to temp buffer before making the new one.
+    (with-temp-buffer
+      (let ((buffer-name (generate-new-buffer-name "*python*")))
+        (pop-to-buffer (python-shell-make-comint
+                        (python-shell-calculate-command)
+                        buffer-name
+                        t))
+        ;; rename the buffer after the fact, because Emacs's internal commands for
+        ;; making Python shells do their own manipulation on any buffer name you hand it
+        (rename-buffer buffer-name))))
+  :bind ("<f2>" . #'create-python-shell)
+  :commands python-shell-make-comint)
+
 ;; IDE & autocompletion stuff
 (use-package company)
 

@@ -59,15 +59,6 @@
               )
 (add-to-list 'completion-ignored-extensions ".mod")
 
-;; python settings
-(when (eq system-type 'darwin)
-  (setq-default python-shell-virtualenv-root
-                (concat "/Users/" (user-login-name) "/python-venv/main")))
-(setq-default python-indent-guess-indent-offset nil
-              python-shell-interpreter "ipython3"
-              python-shell-completion-native-enable nil
-              python-shell-interpreter-args "--no-confirm-exit --simple-prompt")
-
 ;; (use-package f90
 ;;   :mode ("\\.\\(F90\\|fpp\\)$" . f90-mode)
 ;;   :config
@@ -135,7 +126,6 @@
 (global-set-key (kbd "M-O") #'previous-multiframe-window)
 (global-set-key (kbd "M-Y") (lambda () (interactive) (yank-pop -1)))
 (global-set-key (kbd "<f1>") #'create-shell)
-(global-set-key (kbd "<f2>") #'create-python-shell)
 
 ;; could put these mode-specific types of shortcuts into a minor mode as well
 (modes-set-key '(f90-mode c-mode c++-mode) (kbd "C-c C-c") #'compile-in-dir)

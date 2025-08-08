@@ -4,7 +4,7 @@
 ;;
 ;; initialize my own commands
 
-;(require 'cl-lib)
+;;(require 'cl-lib)
 
 ;; add a bunch of elements to a list
 (defun add-all-to-list (list &rest elements)
@@ -39,10 +39,9 @@
 
 (defun system-distro () (car (split-string (shell-command-to-string "lsb_release -si") "\n")))
 
-;; print the result of a shell command to a string,
-;; but do so from an interactive login shell that
-;; gets the user's full environment, and remove any
-;; junk that might have also been printed upon logging in.
+;; print the result of a shell command to a string, but do so from an
+;; interactive login shell that gets the user's full environment, and
+;; remove any junk that might have also been printed upon logging in.
 (defun full-shell-command-to-clean-string (command)
   (car (last
         (split-string
@@ -51,9 +50,9 @@
         2)))
 
 ;; interactive commands
-
 (defun create-tags (dir-name)
-  "Create tags file in specified directory, from source files in subdirectories."
+  "Create tags file in specified directory, from source files in
+subdirectories."
   (interactive "DDirectory: ")
 
   ;; remove trailing "/" if one exists, then create tags in the given directory
@@ -73,23 +72,6 @@
   (interactive)
   (shell (generate-new-buffer-name "*shell*")))
 
-(defun create-python-shell ()
-  "Open a new Python shell buffer."
-  (interactive)
-  (use-package python :demand t)
-
-  ;; for some reason, if the current buffer is a python shell, creating a new
-  ;; shell screws up existing ones. switch to temp buffer before making the new one.
-  (with-temp-buffer
-    (pop-to-buffer
-     (python-shell-make-comint
-      (python-shell-calculate-command)
-      (generate-new-buffer-name "*python*")
-      t))
-    ;; rename the buffer after the fact, because Emacs's internal commands for
-    ;; making Python shells do their own manipulation on any buffer name you hand it
-    (rename-buffer (generate-new-buffer-name "*python*"))))
-
 ;; quick macro directly to snoonet
 (defun irc-snoonet ()
   "Connect to snoonet"
@@ -103,9 +85,9 @@
 ;; then storing that given directory for quick recompiles
 (let ((compile-in-dir--dir nil)) ; stored compile directory
   (defun compile-in-dir (&optional get-new-directory)
-    "Issues a compile in a given directory or recompiles
-in last given directory. If given a non-nil argument
-(or prefixed with C-u), it asks for a directory."
+    "Issues a compile in a given directory or recompiles in last given
+directory. If given a non-nil argument (or prefixed with C-u), it asks
+for a directory."
     (interactive "P")
 
     (if (or get-new-directory (not compile-in-dir--dir))
