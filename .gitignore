@@ -16,6 +16,7 @@ eln-cache
 *~
 *\#*
 lisp/init/init-secrets.el
+custom.el
 session.*
 tramp
 abbrev_defs
