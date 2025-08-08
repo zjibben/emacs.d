@@ -41,6 +41,7 @@
 (use-package wordnut)
 (use-package vterm)
 (use-package counsel
+  :demand t
   :bind (;; Ivy-based interface to standard commands
          ("C-s" . swiper-isearch)
          ("C-r" . swiper-isearch-backward)
