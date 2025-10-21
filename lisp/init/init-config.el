@@ -55,7 +55,7 @@
               f90-type-indent         2
               f90-program-indent      2
               f90-continuation-indent 4
-              js-indent-level         2
+              js-indent-level         4
               )
 (add-to-list 'completion-ignored-extensions ".mod")
 

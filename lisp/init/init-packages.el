@@ -151,6 +151,7 @@
   )
 
 (use-package pdf-tools
+  :mode ("\\.pdf\\'" . pdf-view-mode)
   :config
   (pdf-tools-install t nil t)
   (add-hook 'pdf-view-mode-hook #'pdf-tools-enable-minor-modes)
@@ -220,9 +221,9 @@
 (use-package clang-format
   :demand t
   :hook (c++-mode . (lambda ()
-              (fset 'c-indent-region 'clang-format-region)
-              (fset 'c-indent-line-or-region 'clang-format-for-tab)
-              (c-set-offset 'innamespace [0])))
+                      (fset 'c-indent-region 'clang-format-region)
+                      (fset 'c-indent-line-or-region 'clang-format-for-tab)
+                      (c-set-offset 'innamespace [0])))
   :config
   (defun only-forward-to-indentation ()
     "Move back-to-indentation if the first whitespace is forward.
