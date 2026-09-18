@@ -109,16 +109,22 @@
 (use-package julia-mode)
 (use-package lua-mode)
 (use-package markdown-mode
+  :mode ("\\.md\\'" . gfm-mode)
   :config
-  (setq-mode-default 'markdown-mode fill-column 99999999999999)
+  (setq-mode-default 'markdown-mode fill-column 80)
   (add-hook 'markdown-mode-hook #'flyspell-mode)
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   (add-hook 'markdown-mode-hook (lambda () (add-hook 'before-save-hook #'whitespace-cleanup nil t)))
   (add-hook 'markdown-mode-hook (lambda () (add-hook 'before-save-hook
                                                      (lambda () (untabify (point-min) (point-max)))
                                                      nil t)))
-  (setq-default markdown-command "pandoc")
+  (setq-default markdown-enable-math t
+                markdown-command "pandoc"
+                markdown-split-window-direction 'right)
   )
+(use-package mermaid-mode)
+(use-package texfrag
+  :hook (markdown-mode . texfrag-mode))
 (use-package typescript-mode)
 (use-package pkgbuild-mode)
 (use-package powershell)
