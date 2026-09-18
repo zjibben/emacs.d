@@ -2,10 +2,6 @@
 ;;
 ;; initialize repositories and packages
 
-;; add repos
-;;(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-
 ;; these packages need to be organized somewhere
 (use-package adaptive-wrap)
 (use-package fill-column-indicator

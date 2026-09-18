@@ -12,11 +12,14 @@
 ;;   ;; To disable collection of benchmark data after init is done.
 ;;   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
-(add-to-list 'load-path (locate-user-emacs-file "lisp/init"))
-(add-to-list 'load-path (locate-user-emacs-file "lisp"))
-
+(require 'use-package-ensure)
 (setq-default use-package-always-ensure t
               use-package-always-defer t)
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
+(add-to-list 'load-path (locate-user-emacs-file "lisp/init"))
+(add-to-list 'load-path (locate-user-emacs-file "lisp"))
 
 (require 'init-secrets nil t)
 (require 'init-commands)
