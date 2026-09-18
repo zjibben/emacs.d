@@ -188,8 +188,7 @@
 (use-package python
   :init
   (when (eq system-type 'darwin)
-    (setq-default python-shell-virtualenv-root
-                  (concat "/Users/" (user-login-name) "/python-venv/main")))
+    (setq-default python-shell-virtualenv-root (expand-file-name "~/python-venv/main")))
   (setq-default python-indent-guess-indent-offset nil
                 python-shell-interpreter "ipython3"
                 python-shell-completion-native-enable nil
