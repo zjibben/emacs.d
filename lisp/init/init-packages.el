@@ -249,28 +249,126 @@ arguments."
 
 (use-package gptel
   :config
-  (setq-default gptel-model   'deepseek/deepseek-r1-0528:free
-                gptel-include-reasoning "*GPT Reasoning*"
-                gptel-backend
-                (gptel-make-openai "OpenRouter"
-                  :host "openrouter.ai"
-                  :endpoint "/api/v1/chat/completions"
-                  :stream t
-                  :key (openrouter-api-key)
-                  :models '(deepseek/deepseek-r1-0528:free
-                            openai/gpt-oss-120b
-                            google/gemini-2.5-flash
-                            openai/o4-mini-high
-                            anthropic/claude-sonnet-4
-                            ))))
+  (setq-default gptel-include-reasoning "*GPT Reasoning*"
+                ;;gptel-model   'deepseek/deepseek-r1-0528:free
+                gptel-model   'anthropic.claude-sonnet-4-5-20250929-v1:0
+                gptel-backend (gptel-make-openai "OpenRouter"
+                                :host "openrouter.ai"
+                                :endpoint "/api/v1/chat/completions"
+                                :stream t
+                                :key (openrouter-api-key)
+                                :models '(deepseek/deepseek-r1-0528:free
+                                          openai/gpt-oss-120b
+                                          google/gemini-2.5-flash
+                                          openai/o4-mini-high
+                                          anthropic/claude-sonnet-4
+                                          ))
+                gptel-backend (gptel-make-openai "LANL AI Portal"
+                                :host "aiportal-api.aws.lanl.gov"
+                                :endpoint "/v1/chat/completions"
+                                :stream t
+                                :key (lanl-ai-portal-api-key)
+                                :models '(anthropic.claude-sonnet-4-5-20250929-v1:0
+                                          anthropic.claude-3-haiku-20240307-v1:0
+                                          gpt-oss-120b
+                                          ))
+                ))
 
+;; (use-package gptel-fn-complete
+;;   :ensure t
+;;   :config
+;;   (defgroup gptel-context nil
+;;     "Context helpers for gptel."
+;;     :group 'gptel)
+
+;;   (defcustom gptel-context-lines-around 10
+;;     "Number of lines above and below point to add as context."
+;;     :type 'integer
+;;     :group 'gptel-context)
+
+;;   (defun gptel-context-add-lines-around ()
+;;     "Add N lines above and below point to GPTel context."
+;;     (interactive)
+;;     (gptel-context-remove-all)
+;;     (let* ((n gptel-context-lines-around)
+;;            (start
+;;             (save-excursion
+;;               (forward-line (- n))
+;;               (point)))
+;;            (end
+
+;;               (forward-line n)
+;;               (point))))
+;;       (gptel-context--add-region (current-buffer) start end t)
+;;       (message "Added lines %d..%d to GPTel context" start end)))
+
+;;   (defadvice gptel-fn-complete (before add-context activate)
+;;     "Add context before calling gptel-fn-complete."
+;;     (gptel-context-add-lines-around))
+
+;;   (advice-add
+;;    'gptel--rewrite-accept
+;;    :after
+;;    (lambda (&rest _args)
+;;      (symex-select-nearest-in-line)
+;;      (gptel-context-remove-all)))
+
+;;   (define-key lisp-mode-map (kbd "TAB") #'gptel-fn-complete)
+;;   (define-key emacs-lisp-mode-map (kbd "TAB") #'gptel-fn-complete)
+;;   )
+
+;; (use-package aidermacs
+;;   :bind (("C-c a" . aidermacs-transient-menu))
+;;   :config
+;;   (setenv "OPENROUTER_API_KEY" (openrouter-api-key))
+;;   :custom
+;;   ;; See the Configuration section below
+;;   (aidermacs-default-chat-mode 'architect)
+;;   (aidermacs-default-model "openrouter/deepseek/deepseek-r1-0528:free"))
+
+;; /Users/zjibben/.local/share/uv/tools/aider-chat/bin/python -m pip install boto3
 (use-package aidermacs
   :bind (("C-c a" . aidermacs-transient-menu))
   :config
-  (setenv "OPENROUTER_API_KEY" (openrouter-api-key))
+  (setenv "OPENAI_API_BASE" "https://aiportal-api.aws.lanl.gov")
+  (setenv "OPENAI_API_KEY" (lanl-ai-portal-api-key))
+  (setenv "AWS_ACCESS_KEY_ID" (lanl-ai-portal-api-key))
+  (setenv "AWS_SECRET_ACCESS_KEY" (lanl-ai-portal-api-key))
+  (setenv "REQUESTS_CA_BUNDLE" "/Library/Application Support/Mozilla/Certificates/LANLWINOLT-RootCA.pem")
+  (setenv "SSL_CERT_FILE" "/Library/Application Support/Mozilla/Certificates/LANLWINOLT-RootCA.pem")
+  (setq aidermacs-openai-api-key (lanl-ai-portal-api-key)
+        aidermacs-openai-api-base "https://aiportal-api.aws.lanl.gov"
+        aidermacs-model "openai/anthropic.claude-sonnet-4-5-20250929-v1:0")
   :custom
   ;; See the Configuration section below
   (aidermacs-default-chat-mode 'architect)
-  (aidermacs-default-model "openrouter/deepseek/deepseek-r1-0528:free"))
+  (aidermacs-default-model "openai/anthropic.claude-sonnet-4-5-20250929-v1:0"))
+
+;; (use-package minuet
+;;   :ensure t
+;;   :config
+;;   (setq minuet-provider 'openai-compatible)
+;;   (setq minuet-request-timeout 2.5)
+;;   (setq minuet-auto-suggestion-throttle-delay 1.5) ; Increase to reduce costs and avoid rate limits
+;;   (setq minuet-auto-suggestion-debounce-delay 0.6) ; Increase to reduce costs and avoid rate limits
+
+;;   (plist-put minuet-openai-compatible-options :end-point "https://openrouter.ai/api/v1/chat/completions")
+;;   (plist-put minuet-openai-compatible-options :api-key "OPENROUTER_API_KEY")
+;;   (plist-put minuet-openai-compatible-options :model "deepseek/deepseek-r1-0528:free")
+
+;;   ;; Prioritize throughput for faster completion
+;;   (minuet-set-optional-options minuet-openai-compatible-options :provider '(:sort "throughput"))
+;;   (minuet-set-optional-options minuet-openai-compatible-options :max_tokens 56)
+;;   (minuet-set-optional-options minuet-openai-compatible-options :top_p 0.9))
+
+;; (use-package copilot
+;;   :ensure t
+;;   :config
+;;   (add-hook 'prog-mode-hook 'copilot-mode)
+;;   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+;;   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+;;   (setopt copilot-lsp-settings '(:github-enterprise (:uri "https://example2.ghe.com")))
+;;   (add-to-list 'copilot-major-mode-alist '("f90" . "fortran"
+;;                                            "cc" . "cpp")))
 
 (provide 'init-packages)
