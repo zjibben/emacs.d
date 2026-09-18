@@ -91,6 +91,7 @@
                                         )
                 counsel-find-file-ignore-regexp "\(?:\‘[#.]\)\|\(?:[#~]\’\)"))
 (use-package counsel-etags)
+(use-package org-roam)
 (use-package flycheck)
 (use-package lsp-ivy)
 
