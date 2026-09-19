@@ -80,6 +80,12 @@
                                         (lambda () (untabify (point-min) (point-max)))
                                         nil t)))
 
+(add-to-mode-hooks '(f90-mode c-mode c++-mode python-mode emacs-lisp-mode sh-mode html-mode)
+                   #'display-fill-column-indicator-mode)
+(setq-default fill-column 100
+              sentence-end-double-space nil)
+(setq-mode-default 'rst-mode fill-column 80)
+
 (use-package org
   :config
   (setq-mode-default 'org-mode fill-column 80)

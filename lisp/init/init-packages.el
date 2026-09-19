@@ -4,15 +4,6 @@
 
 ;; these packages need to be organized somewhere
 (use-package adaptive-wrap)
-(use-package fill-column-indicator
-  :demand t
-  :config
-  (add-to-mode-hooks '(f90-mode c-mode c++-mode python-mode emacs-lisp-mode sh-mode html-mode)
-                     #'fci-mode)
-  (setq-default fci-rule-color "dim gray"
-                fill-column 100
-                sentence-end-double-space nil)
-  (setq-mode-default 'rst-mode fill-column 80))
 ;;(use-package multi-term)
 
 ;; (use-package flx-ido

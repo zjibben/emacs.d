@@ -26,7 +26,6 @@ It's important to note for anyone else who might be interested in using it that 
 - auctex
 - djvu
 - eimp
-- fill-column-indicator
 - gnuplot-mode
 - haskell-mode
 - latex-pretty-symbols
@@ -43,7 +42,7 @@ It's important to note for anyone else who might be interested in using it that 
 
 The theme is set dynamically whenever a new frame is created. In particular, ample-theme is used in all cases, but if opened in a terminal your terminal's background color setting takes priority. Powerline's default theme is used for graphical frames and the vim theme is used for console frames. Font size is set based on screen resolution.
 
-`fci-mode` is automatically enabled in F90, C, C++, Python, Emacs Lisp, Shell, and Arduino modes. It will show a line along the 101st column.
+`display-fill-column-indicator-mode` is automatically enabled in F90, C, C++, Python, Emacs Lisp, Shell, and Arduino modes. It will show a line along the 101st column.
 
 LaTeX and Org modes automatically spell check and display LaTeX macros like `\alpha` as their corresponding characters.
 
@@ -77,12 +76,12 @@ If you need to go through a proxy, the setup will fail unless you set up your pr
     (defvar https-proxy-host http-proxy-host     "Host address for https proxy")
     (defvar https-proxy-port http-proxy-port     "Host port for https proxy")
     (setq-default proxy-enable t)
-    
+
     ;; personal/login info
     (setq-default user-mail-address "me@somewhere.com"
                   irc-snoonet-user "username"
                   irc-snoonet-pass "password")
-    
+
     (provide 'init-private-info)
 
 # Usage
