@@ -1,8 +1,12 @@
 # About
 
-My Emacs configuration. I keep fairly true to the Emacs defaults, only modifying the look and adding a few shortcuts and commands, without doing anything too drastic.
+My Emacs configuration. I keep fairly true to the Emacs defaults, only modifying
+the look and adding a few shortcuts and commands, without doing anything too
+drastic.
 
-It's important to note for anyone else who might be interested in using it that environment and certain mode settings in `init-config.el` are very specific to my own machines and projects.
+It's important to note for anyone else who might be interested in using it that
+environment and certain mode settings in `init-config.el` are very specific to
+my own machines and projects.
 
 ## Features
 
@@ -13,90 +17,97 @@ It's important to note for anyone else who might be interested in using it that 
 | `<f1>`                      | Open a shell.                                                                        |
 | `<f2>`                      | Open an IPython shell.                                                               |
 | `M-o`, `M-O`                | Move to the next/previous window.                                                    |
-| `C-c C-c` in `fortran-mode` | Compile or recompile your project. Preface with `C-u` to reset your compile command. |
+| `C-c C-c` in C, C++, and F90 modes | Compile or recompile a project. Preface with `C-u` to choose its directory.  |
 | `C-s`, `C-r`                | Do a regexp search                                                                   |
 | `C-x C-b`                   | Open ibuffer                                                                         |
 | `C-x C-k`                   | Kill this buffer with no questions asked                                             |
-| `C-x g`                     | Open `magit-status`                                                                  |
+| `C-c g`                     | Open Magit's file dispatch                                                           |
 
-### Outside Packages
+### Notable Packages
 
 - adaptive-wrap
-- arduino-mode
 - auctex
-- djvu
-- eimp
-- gnuplot-mode
-- haskell-mode
-- latex-pretty-symbols
+- clang-format
+- counsel and Ivy
+- gptel and aidermacs
+- lsp-mode
 - magit
+- markdown-mode
+- org-roam
 - pdf-tools
-- pkgbuild-mode
-- plantuml-mode
 - powerline
-- python-info
-- rust-mode
-- smex
+- vterm
 
 ### Behavior
 
-The theme is set dynamically whenever a new frame is created. In particular, ample-theme is used in all cases, but if opened in a terminal your terminal's background color setting takes priority. Powerline's default theme is used for graphical frames and the vim theme is used for console frames. Font size is set based on screen resolution.
+The theme is set dynamically whenever a new frame is created. Theme selection,
+fonts, and terminal-specific behavior live in `init-theme.el`; `ample-theme`
+remains part of that setup.
 
-`display-fill-column-indicator-mode` is automatically enabled in F90, C, C++, Python, Emacs Lisp, Shell, and Arduino modes. It will show a line along the 101st column.
+`display-fill-column-indicator-mode` is automatically enabled in F90, C, C++,
+Python, Emacs Lisp, Shell, and HTML modes. It follows the 100-column default.
 
-LaTeX and Org modes automatically spell check and display LaTeX macros like `\alpha` as their corresponding characters.
+LaTeX, Markdown, and Org modes enable spell checking. Org and LaTeX also render
+many LaTeX macros, such as `\alpha`, as their corresponding characters.
 
 ## Dependencies
 
-For the most basic usage, the only dependency is Emacs 25 or greater. However, use of individual packages require their dependencies. For everything, these are required:
+Emacs 29 or later is recommended; it includes the `use-package` support needed
+to bootstrap the configuration and the built-in fill-column indicator. Package
+dependencies are installed automatically from GNU ELPA and MELPA on first use.
 
-- texlive
-- ipython3
-- poppler
-- git
-- plantuml
-- gnuplot
-- haskell
-- rust
+The following command-line tools enable the corresponding optional workflows:
+
+- `clang-format` for C++ formatting
+- `clangd` for C++ LSP support
+- `ipython3` for the Python REPL
+- `pandoc` for Markdown export and preview
+- TeX Live and Poppler for TeX and PDF workflows
+- Git for Magit
+- PlantUML for diagram rendering
 
 # Installation
 
 Clone the repository to `~/.emacs.d`:
 
-    $ git clone git://github.com:zjibben/emacs.d.git ~/.emacs.d
+``` shell
+git clone https://github.com/zjibben/emacs.d.git ~/.emacs.d
+```
 
-Then, open Emacs. It will automatically download package dependencies and configure them.
+Then, open Emacs. It will automatically download package dependencies and
+configure them.
 
-If you need to go through a proxy, the setup will fail unless you set up your proxy through an `init-private-info.el` package. Private and user-specific login information is also set there. An example is shown below. If you don't need any of this, you can safely ignore it.
+Optional private settings are loaded from `lisp/init/init-secrets.el`. This file
+is not part of the repository. It is useful for credentials used by optional AI
+integrations; omit it if those integrations are not used.
 
-    ;; proxy info
-    (defvar http-proxy-host  "proxyout.work.com" "Host address for http proxy")
-    (defvar http-proxy-port  8080                "Host port for http proxy")
-    (defvar no-proxy-domain  "work\\.com"        "Domain for which no proxy is needed")
-    (defvar https-proxy-host http-proxy-host     "Host address for https proxy")
-    (defvar https-proxy-port http-proxy-port     "Host port for https proxy")
-    (setq-default proxy-enable t)
+``` emacs-lisp
+;; Define only the credentials for services you use.
+(defun openrouter-api-key () "...")
+(defun lanl-ai-portal-api-key () "...")
 
-    ;; personal/login info
-    (setq-default user-mail-address "me@somewhere.com"
-                  irc-snoonet-user "username"
-                  irc-snoonet-pass "password")
-
-    (provide 'init-private-info)
+(provide 'init-secrets)
+```
 
 # Usage
 
-This setup does not make any efforts to reduce startup time, since I almost always run Emacs as a daemon anyways. In particular, I have
+This setup is intended to run as an Emacs daemon. For graphical clients, use
 
-    emacsclient -c -a ""
+``` shell
+emacsclient -c -a ""
+```
 
-assigned to a keyboard shortcut through my desktop environment, and
+For terminal clients, this shell function safely forwards filenames to the
+daemon:
 
-    function emc { emacsclient -t -a "" -e "(unless (string= \"\" \"$@\") (find-file \"$@\"))"; }
-    export -f emc
+``` shell
+emc() { emacsclient -t -a "" "$@"; }
+```
 
-in my `~/.bashrc` for console use. This function uses Elisp to permanently add any named files to the buffer list, so they are not closed when the Emacs client is closed. For quick edits, I use
+For quick standalone terminal edits, use
 
-    alias eml='emacs -nw -q -l ~/.emacs.d/init-lite.el'
+``` shell
+alias eml='emacs -nw -q -l ~/.emacs.d/init-lite.el'
+```
 
-to open a new Emacs session with the lite configuration, which loads rather quickly.
+to open a new Emacs session with the lite configuration.
