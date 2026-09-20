@@ -84,7 +84,6 @@
 (use-package counsel-etags)
 (use-package org-roam)
 (use-package flycheck)
-(use-package lsp-ivy)
 
 ;; add new modes
 (use-package dockerfile-mode)
@@ -206,10 +205,10 @@
 ;; IDE & autocompletion stuff
 (use-package company)
 
-(use-package lsp-mode
-  :hook (c++-mode . lsp)
+(use-package eglot
+  :hook (c++-mode . eglot-ensure)
   :config
-  (setq-default lsp-enable-semantic-highlighting nil))
+  (add-to-list 'eglot-ignored-server-capabilities :semanticTokensProvider))
 
 (use-package clang-format
   :demand t
