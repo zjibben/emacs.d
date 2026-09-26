@@ -87,6 +87,7 @@
 (setq-mode-default 'rst-mode fill-column 80)
 
 ;; org-mode
+;; TODO: sort the agenda views by priority. https://github.com/alphapapa/org-ql/issues/79
 (use-package org-ql)
 (use-package org-super-agenda
   :config
@@ -96,60 +97,148 @@
          ("C-c c" . org-capture)
          ("C-c l" . org-store-link))
   :config
-  (setq-default org-directory    "~/sync/docs/org"
-                org-agenda-files '("inbox.org" "personal.org" "work.org" "media.org")
-                org-refile-targets '((org-agenda-files . t))
-                org-outline-path-complete-in-steps nil
-                org-refile-use-outline-path t
+  (setq-default org-directory  "~/sync/docs/org"
+                org-agenda-files  '("inbox.org" "personal.org" "work.org" "media.org")
+                org-refile-targets  '((org-agenda-files . t))
+                org-outline-path-complete-in-steps  nil
+                org-refile-use-outline-path  t
                 org-pretty-entities  t ; render math by default
-                org-log-done 'time
-                org-log-into-drawer t
+                org-log-done  'time
+                org-log-into-drawer  t
                 org-clock-in-switch-to-state "DOING"
-                org-priority-highest 1
-                org-priority-lowest 5
-                org-priority-default 3
-                ;org-deadline-warning-days 7
+
+                ;; TODO: change these to numbers once org-ql gets that working
+                org-priority-highest  ?A
+                org-priority-lowest  ?E
+                org-priority-default  ?C
+
+                org-agenda-window-setup  'current-window
+                org-agenda-restore-windows-after-quit  t
+                org-super-agenda-keep-order  nil
+                ;;org-deadline-warning-days 7
 
                 org-agenda-custom-commands
                 '(("w" "Work Agenda"
                    ((org-ql-block '(and (path "work.org")
                                         (todo)
                                         (or (tags "active")
-                                            (priority >= "2")
+                                            (priority >= "B")
                                             (todo "DOING")
                                             (deadline auto)
                                             (scheduled :to today)))
-                                  ((org-ql-block-header "Group 1")
+                                  ((org-ql-block-header "Active")
                                    (org-super-agenda-groups '((:auto-parent t)))
-                                   ))
+                                   ;;(org-super-agenda-keep-order t)
+                                   (org-agenda-sorting-strategy '(priority deadline-up scheduled-up))
+                                   )
+                                  )
                     (org-ql-block '(and (path "work.org")
                                         (todo)
                                         (not (todo "DOING"))
                                         (not (tags "active"))
-                                        (priority < "2"))
-                                  ((org-ql-block-header "Unassigned")))
-                    ))
+                                        (not (priority >= "B"))
+                                        (not (scheduled))
+                                        )
+                                  ((org-ql-block-header "Backlog")))
+                    )
+                   )
+                  ("u" "Work Week Summary"
+                   ((org-ql-block '(and (path "work.org")
+                                        (done)
+                                        ;;(closed 7)
+                                        (closed :from ,(- 1 (string-to-number
+                                                             (format-time-string "%u"))))
+                                        )
+                                  ((org-ql-block-header "Work Week Summary")
+                                   (org-super-agenda-groups '((:auto-parent t)))
+                                   ;;(org-super-agenda-keep-order t)
+                                   (org-agenda-sorting-strategy '(priority deadline-up scheduled-up))
+                                   )
+                                  )
+                    )
+                   )
                   ("pa" "Personal Agenda"
-                   ((agenda "")
-                    (tags-todo "work")
-                    (tags "office")))
+                   ((org-ql-block '(and (path "personal.org")
+                                        (todo)
+                                        (not (tags "purchase"))
+                                        (or (tags "active")
+                                            (priority >= "B")
+                                            (todo "DOING")
+                                            (deadline auto)
+                                            (scheduled :to today)))
+                                  ((org-ql-block-header "Active")
+                                   (org-super-agenda-groups '((:auto-parent t)))
+                                   ;;(org-super-agenda-keep-order t)
+                                   (org-agenda-sorting-strategy '(priority deadline-up scheduled-up))
+                                   )
+                                  )
+                    (org-ql-block '(and (path "personal.org")
+                                        (todo)
+                                        (not (todo "DOING"))
+                                        (not (tags "active" "purchase"))
+                                        (not (priority >= "B"))
+                                        (not (scheduled))
+                                        )
+                                  ((org-ql-block-header "Backlog")))
+                    )
+                   )
+                  ("pp" "Purchases"
+                   ((org-ql-block '(and (todo)
+                                        (tags "purchase"))
+                                  ((org-ql-block-header "Purchases")
+                                   (org-super-agenda-groups '((:auto-parent t))))))
+                   )
                   ("pm" "Media"
                    ((org-ql-block '(and (path "media.org")
+                                        (not (outline-path "Download"))
                                         (or (todo "DOING")
                                             (tags "active")))
                                   ((org-ql-block-header "Started")
                                    (org-super-agenda-groups '((:auto-parent t)))))
                     (org-ql-block '(and (path "media.org")
+                                        (not (outline-path "Download"))
                                         (todo)
                                         (not (todo "DOING"))
-                                        (or (priority >= "2")
-                                            (tags "active")))
-                                  ((org-ql-block-header "High Priority"))))))
+                                        (priority >= "B")
+                                        )
+                                  ((org-ql-block-header "Next up")
+                                   (org-super-agenda-groups '((:auto-parent t)))
+                                   ))
+                    (org-ql-block '(and (path "media.org")
+                                        (todo)
+                                        (not (outline-path "Download"))
+                                        (not (todo "DOING"))
+                                        (not (priority >= "B"))
+                                        (not (scheduled))
+                                        )
+                                  ((org-ql-block-header "Backlog")))
+                    )
+                   )
+                  ("pc" "Media Completed This Year"
+                   ((org-ql-block '(and (path "media.org")
+                                        (not (outline-path "Download"))
+                                        (done)
+                                        (closed :from ,(- 1 (string-to-number
+                                                             (format-time-string "%j"))))
+                                        )
+                                  ((org-ql-block-header "Completed This Year")
+                                   (org-super-agenda-groups '((:auto-parent t)))))
+                    )
+                   )
+                  ("pd" "Media Downloads"
+                   ((org-ql-block '(and (path "media.org")
+                                        (todo)
+                                        (outline-path "Download")
+                                        )
+                                  ((org-ql-block-header "Downloads")
+                                   (org-super-agenda-groups '((:auto-parent t))))))
+                   )
+                  )
 
                 ;; note DOING is ahead of TODO for sorting purposes
-                org-todo-keywords '((sequence "DOING(i!)" "TODO(t)"
+                org-todo-keywords '((sequence "DOING(i!)" "TODO(t)" "WAITING(w!)"
                                               "|" "DONE(d!)" "CANCELED(x@)" "DELEGATED"))
-                org-todo-keyword-faces '(("DOING" . "yellow"))
+                org-todo-keyword-faces '(("DOING" . "yellow") ("WAITING" . "yellow"))
                 org-capture-templates
                 '(("t" "Todo" entry (file+headline "~/sync/docs/org/inbox.org" "Tasks")
                    "* TODO %?\n:PROPERTIES:\n:CREATED: %u\n:END:\n\n%a\n%i")
