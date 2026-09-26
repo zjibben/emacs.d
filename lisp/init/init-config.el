@@ -86,29 +86,99 @@
               sentence-end-double-space nil)
 (setq-mode-default 'rst-mode fill-column 80)
 
-(use-package org
+;; org-mode
+(use-package org-ql)
+(use-package org-super-agenda
   :config
+  (org-super-agenda-mode 1))
+(use-package org
+  :bind (("C-c a" . org-agenda)
+         ("C-c c" . org-capture)
+         ("C-c l" . org-store-link))
+  :config
+  (setq-default org-directory    "~/sync/docs/org"
+                org-agenda-files '("inbox.org" "personal.org" "work.org" "media.org")
+                org-refile-targets '((org-agenda-files . t))
+                org-outline-path-complete-in-steps nil
+                org-refile-use-outline-path t
+                org-pretty-entities  t ; render math by default
+                org-log-done 'time
+                org-log-into-drawer t
+                org-clock-in-switch-to-state "DOING"
+                org-priority-highest 1
+                org-priority-lowest 5
+                org-priority-default 3
+                ;org-deadline-warning-days 7
+
+                org-agenda-custom-commands
+                '(("w" "Work Agenda"
+                   ((org-ql-block '(and (path "work.org")
+                                        (todo)
+                                        (or (tags "active")
+                                            (priority >= "2")
+                                            (todo "DOING")
+                                            (deadline auto)
+                                            (scheduled :to today)))
+                                  ((org-ql-block-header "Group 1")
+                                   (org-super-agenda-groups '((:auto-parent t)))
+                                   ))
+                    (org-ql-block '(and (path "work.org")
+                                        (todo)
+                                        (not (todo "DOING"))
+                                        (not (tags "active"))
+                                        (priority < "2"))
+                                  ((org-ql-block-header "Unassigned")))
+                    ))
+                  ("pa" "Personal Agenda"
+                   ((agenda "")
+                    (tags-todo "work")
+                    (tags "office")))
+                  ("pm" "Media"
+                   ((org-ql-block '(and (path "media.org")
+                                        (or (todo "DOING")
+                                            (tags "active")))
+                                  ((org-ql-block-header "Started")
+                                   (org-super-agenda-groups '((:auto-parent t)))))
+                    (org-ql-block '(and (path "media.org")
+                                        (todo)
+                                        (not (todo "DOING"))
+                                        (or (priority >= "2")
+                                            (tags "active")))
+                                  ((org-ql-block-header "High Priority"))))))
+
+                ;; note DOING is ahead of TODO for sorting purposes
+                org-todo-keywords '((sequence "DOING(i!)" "TODO(t)"
+                                              "|" "DONE(d!)" "CANCELED(x@)" "DELEGATED"))
+                org-todo-keyword-faces '(("DOING" . "yellow"))
+                org-capture-templates
+                '(("t" "Todo" entry (file+headline "~/sync/docs/org/inbox.org" "Tasks")
+                   "* TODO %?\n:PROPERTIES:\n:CREATED: %u\n:END:\n\n%a\n%i")
+                  ("w" "Todo without context" entry
+                   (file+headline "~/sync/docs/org/inbox.org" "Tasks")
+                   "* TODO %?\n:PROPERTIES:\n:CREATED: %u\n:END:\n\n%i")
+                  ("n" "Note" entry (file+headline "~/sync/docs/org/inbox.org" "Notes")
+                   "* %?\n:PROPERTIES:\n:CREATED: %u\n:END:\n\n%a\n%i")
+                  ("j" "Journal" entry (file+olp+datetree "~/sync/docs/org/inbox.org" "Journal")
+                   "* %u %?\n:PROPERTIES:\n:CREATED: %u\n:END:\n\n%a\n%i"))
+                )
   (setq-mode-default 'org-mode fill-column 80)
   (add-hook 'org-mode-hook #'flyspell-mode)             ; auto spell-checking in org
   (add-hook 'org-mode-hook #'visual-line-mode)          ; break lines between words
   (add-hook 'org-mode-hook #'adaptive-wrap-prefix-mode) ; wraped headers are indented properly
-  (setq-default org-pretty-entities t)                  ; render math by default
   (setcar (nthcdr 4 org-emphasis-regexp-components) 20) ; emphasize up to 20 lines instead of 1
-  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
-
+  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-componentsi)
   (defun create-org-log ()
     "Add an org log timestamp at point."
     (interactive)
-    (org-insert-drawer nil "LOGBOOK")
-    (insert "- ")
+    (org-insert-drawer nil "PROPERTIES")
+    (insert ":CREATED: ")
     (org-insert-time-stamp (current-time) nil t)
-    (insert " Created")
-    (org-up-element)
     (org-up-element)
     (org-cycle)
     (next-line)
     (org-return-indent)
     (org-open-line 1)))
+(use-package org-roam)
 
 ;; set file ending defaults
 (add-all-to-list 'auto-mode-alist
