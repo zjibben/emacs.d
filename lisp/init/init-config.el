@@ -255,7 +255,7 @@
   (add-hook 'org-mode-hook #'visual-line-mode)          ; break lines between words
   (add-hook 'org-mode-hook #'adaptive-wrap-prefix-mode) ; wraped headers are indented properly
   (setcar (nthcdr 4 org-emphasis-regexp-components) 20) ; emphasize up to 20 lines instead of 1
-  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-componentsi)
+  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
   (defun create-org-log ()
     "Add an org log timestamp at point."
     (interactive)
