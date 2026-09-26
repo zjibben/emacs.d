@@ -317,22 +317,22 @@ arguments."
 ;;   (aidermacs-default-model "openrouter/deepseek/deepseek-r1-0528:free"))
 
 ;; /Users/zjibben/.local/share/uv/tools/aider-chat/bin/python -m pip install boto3
-(use-package aidermacs
-  :bind (("C-c a" . aidermacs-transient-menu))
-  :config
-  (setenv "OPENAI_API_BASE" "https://aiportal-api.aws.lanl.gov")
-  (setenv "OPENAI_API_KEY" (lanl-ai-portal-api-key))
-  (setenv "AWS_ACCESS_KEY_ID" (lanl-ai-portal-api-key))
-  (setenv "AWS_SECRET_ACCESS_KEY" (lanl-ai-portal-api-key))
-  (setenv "REQUESTS_CA_BUNDLE" "/Library/Application Support/Mozilla/Certificates/LANLWINOLT-RootCA.pem")
-  (setenv "SSL_CERT_FILE" "/Library/Application Support/Mozilla/Certificates/LANLWINOLT-RootCA.pem")
-  (setq aidermacs-openai-api-key (lanl-ai-portal-api-key)
-        aidermacs-openai-api-base "https://aiportal-api.aws.lanl.gov"
-        aidermacs-model "openai/anthropic.claude-sonnet-4-5-20250929-v1:0")
-  :custom
-  ;; See the Configuration section below
-  (aidermacs-default-chat-mode 'architect)
-  (aidermacs-default-model "openai/anthropic.claude-sonnet-4-5-20250929-v1:0"))
+;; (use-package aidermacs
+;;   :bind (("C-c a" . aidermacs-transient-menu))
+;;   :config
+;;   (setenv "OPENAI_API_BASE" "https://aiportal-api.aws.lanl.gov")
+;;   (setenv "OPENAI_API_KEY" (lanl-ai-portal-api-key))
+;;   (setenv "AWS_ACCESS_KEY_ID" (lanl-ai-portal-api-key))
+;;   (setenv "AWS_SECRET_ACCESS_KEY" (lanl-ai-portal-api-key))
+;;   (setenv "REQUESTS_CA_BUNDLE" "/Library/Application Support/Mozilla/Certificates/LANLWINOLT-RootCA.pem")
+;;   (setenv "SSL_CERT_FILE" "/Library/Application Support/Mozilla/Certificates/LANLWINOLT-RootCA.pem")
+;;   (setq aidermacs-openai-api-key (lanl-ai-portal-api-key)
+;;         aidermacs-openai-api-base "https://aiportal-api.aws.lanl.gov"
+;;         aidermacs-model "openai/anthropic.claude-sonnet-4-5-20250929-v1:0")
+;;   :custom
+;;   ;; See the Configuration section below
+;;   (aidermacs-default-chat-mode 'architect)
+;;   (aidermacs-default-model "openai/anthropic.claude-sonnet-4-5-20250929-v1:0"))
 
 ;; (use-package minuet
 ;;   :ensure t
