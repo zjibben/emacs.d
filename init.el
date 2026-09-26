@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+;;
 ;; my emacs configuration file
 
 ;; save customizations to a separate file

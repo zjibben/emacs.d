@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+;;
 ;; Prevent package.el from initializing packages too early
 ;(setq package-enable-at-startup nil)
 

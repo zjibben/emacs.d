@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+;;
 ;; emacs-lite configuration file
 ;;
 ;; I use this to load up a lighter emacs in the terminal for quick edits.

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+;;
 ;; init-packages
 ;;
 ;; initialize repositories and packages

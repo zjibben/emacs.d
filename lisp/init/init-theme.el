@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+;;
 ;; init-theme
 ;;
 ;; initialize theming

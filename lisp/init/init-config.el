@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+;;
 ;; init-config
 ;;
 ;; basic emacs configuration
@@ -295,5 +297,12 @@
 ;; could put these mode-specific types of shortcuts into a minor mode as well
 (modes-set-key '(f90-mode c-mode c++-mode) (kbd "C-c C-c") #'compile-in-dir)
 (mode-unset-key 'ibuffer-mode-hook (kbd "M-o")) ; should put in minor mode instead of override
+
+(define-advice display-warning
+    (:around (orig-fun type &rest args) silence-missing-lexical-binding-cookie)
+  "Silence warnings about missing lexical-binding cookies."
+  (if (memq 'missing-lexbind-cookie type)
+      t
+    (apply orig-fun type args)))
 
 (provide 'init-config)
