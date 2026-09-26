@@ -113,6 +113,7 @@
                 org-priority-highest  ?A
                 org-priority-lowest  ?E
                 org-priority-default  ?C
+                org-todo-repeat-to-state "TODO"
 
                 org-agenda-window-setup  'current-window
                 org-agenda-restore-windows-after-quit  t
@@ -122,6 +123,18 @@
                 org-agenda-custom-commands
                 '(("w" "Work Agenda"
                    ((org-ql-block '(and (path "work.org")
+                                        (todo)
+                                        (or (tags "priority")
+                                            (priority "A")
+                                            (deadline 2)
+                                            (scheduled :to today)))
+                                  ((org-ql-block-header "Priority")
+                                   (org-super-agenda-groups '((:auto-parent t)))
+                                   ;;(org-super-agenda-keep-order t)
+                                   (org-agenda-sorting-strategy '(priority deadline-up scheduled-up))
+                                   )
+                                  )
+                    (org-ql-block '(and (path "work.org")
                                         (todo)
                                         (or (tags "active")
                                             (priority >= "B")
@@ -161,6 +174,18 @@
                    )
                   ("pa" "Personal Agenda"
                    ((org-ql-block '(and (path "personal.org")
+                                        (todo)
+                                        (or (tags "priority")
+                                            (priority "A")
+                                            (deadline 2)
+                                            (scheduled :to today)))
+                                  ((org-ql-block-header "Priority")
+                                   (org-super-agenda-groups '((:auto-parent t)))
+                                   ;;(org-super-agenda-keep-order t)
+                                   (org-agenda-sorting-strategy '(priority deadline-up scheduled-up))
+                                   )
+                                  )
+                    (org-ql-block '(and (path "personal.org")
                                         (todo)
                                         (not (tags "purchase"))
                                         (or (tags "active")
