@@ -151,13 +151,13 @@
   (add-hook 'pdf-view-mode-hook #'pdf-tools-enable-minor-modes)
   (add-hook 'pdf-view-mode-hook #'auto-revert-mode))
 
-(use-package eimp
-  :hook ((image-mode . eimp-mode)
-         ;;(eimp-mode . eimp-fit-image-to-window)
-         )
-  ;; :config
-  ;;(add-hook 'eimp-mode-hook  #'eimp-fit-image-to-window)
-  )
+;; (use-package eimp
+;;   :hook ((image-mode . eimp-mode)
+;;          ;;(eimp-mode . eimp-fit-image-to-window)
+;;          )
+;;   ;; :config
+;;   ;;(add-hook 'eimp-mode-hook  #'eimp-fit-image-to-window)
+;;   )
 
 (use-package magit
   :bind ("C-c g" . magit-file-dispatch))
