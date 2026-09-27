@@ -297,7 +297,30 @@
     (org-cycle)
     (next-line)
     (org-return-indent)
-    (org-open-line 1)))
+    (org-open-line 1))
+
+  (defun my/org-sort-todo-priority ()
+    (interactive)
+    ;; Secondary key first, primary key second.
+    (org-sort-entries nil ?p) ; priority
+    (org-sort-entries nil ?o)) ; TODO keyword order
+
+  (defun my/org-update-date ()
+    "Update the #+date keyword to the current date."
+    (save-excursion
+      (goto-char (point-min))
+      (let ((case-fold-search t))
+        (when (re-search-forward "^#\\+date:[ \t]*.*$" nil t)
+          (replace-match
+           (concat "#+date: " (format-time-string "[%Y-%m-%d %a]"))
+           t t)))))
+
+  (defun my/org-enable-update-date ()
+    (add-hook 'before-save-hook #'my/org-update-date nil t))
+
+  (add-hook 'org-mode-hook #'my/org-enable-update-date)
+  )
+
 (use-package org-roam)
 
 ;; set file ending defaults
