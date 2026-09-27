@@ -238,7 +238,9 @@
                                         (not (priority >= "B"))
                                         (not (scheduled))
                                         )
-                                  ((org-ql-block-header "Backlog")))
+                                  ((org-ql-block-header "Backlog")
+                                   (org-super-agenda-groups '((:auto-parent t)))
+                                   ))
                     )
                    )
                   ("pc" "Media Completed This Year"
@@ -258,7 +260,9 @@
                                         (outline-path "Download")
                                         )
                                   ((org-ql-block-header "Downloads")
-                                   (org-super-agenda-groups '((:auto-parent t))))))
+                                   (org-super-agenda-groups '((:auto-parent t)))
+                                   (org-agenda-sorting-strategy '(priority deadline-up scheduled-up))
+                                   )))
                    )
                   )
 
