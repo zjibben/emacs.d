@@ -29,6 +29,7 @@
 
 (use-package wordnut)
 (use-package vterm)
+(use-package flx)
 (use-package counsel
   :demand t
   :bind (;; Ivy-based interface to standard commands
