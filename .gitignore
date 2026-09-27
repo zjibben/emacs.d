@@ -11,6 +11,7 @@ request
 .lsp-session*
 org-persist
 eln-cache
+tree-sitter
 
 # files
 *~
@@ -25,3 +26,4 @@ smex-items
 recentf
 .aider*
 network-security.data
+*.bak
