@@ -340,6 +340,7 @@
 ;; set file ending defaults
 (add-all-to-list 'auto-mode-alist
                  '("\\.\\(F90\\|fpp\\)$" . f90-mode)
+                 '(".sh$" . shell-script-mode)
                  '(".cu$" . c++-mode)
                  '(".h$" . c++-mode)
                  '(".tpp$" . c++-mode)
