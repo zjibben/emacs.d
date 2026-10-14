@@ -105,6 +105,7 @@
                 org-outline-path-complete-in-steps  nil
                 org-refile-use-outline-path  t
                 org-pretty-entities  t ; render math by default
+                org-src-content-indentation  0
                 org-log-done  'time
                 org-log-into-drawer  t
                 org-clock-in-switch-to-state "DOING"
