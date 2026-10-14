@@ -304,11 +304,11 @@
                                               "|" "DONE(d!)" "CANCELED(x@)" "DELEGATED"))
                 org-todo-keyword-faces '(("DOING" . "yellow") ("WAITING" . "yellow"))
                 org-capture-templates
-                '(("t" "Todo" entry (file+headline "~/sync/docs/org/inbox.org" "Tasks")
-                   "* TODO %?\n:PROPERTIES:\n:CREATED: %u\n:END:\n\n%a\n%i")
-                  ("w" "Todo without context" entry
+                '(("t" "Todo without context" entry
                    (file+headline "~/sync/docs/org/inbox.org" "Tasks")
                    "* TODO %?\n:PROPERTIES:\n:CREATED: %u\n:END:\n\n%i")
+                  ("w" "Todo with context" entry (file+headline "~/sync/docs/org/inbox.org" "Tasks")
+                   "* TODO %?\n:PROPERTIES:\n:CREATED: %u\n:END:\n\n%a\n%i")
                   ("n" "Note" entry (file+headline "~/sync/docs/org/inbox.org" "Notes")
                    "* %?\n:PROPERTIES:\n:CREATED: %u\n:END:\n\n%a\n%i")
                   ("j" "Journal" entry (file+olp+datetree "~/sync/docs/org/inbox.org" "Journal")
