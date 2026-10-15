@@ -98,7 +98,12 @@
   :bind (("C-c a" . org-agenda)
          ("C-c c" . org-capture)
          ("C-c l" . org-store-link))
+
+  :custom
+  (org-id-link-to-org-use-id 'create-if-interactive)
+
   :config
+  (require 'org-id)
   (setq-default org-directory  "~/sync/docs/org"
                 org-agenda-files  '("inbox.org" "personal.org" "work.org" "media.org")
                 org-refile-targets  '((org-agenda-files . t))
