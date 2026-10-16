@@ -352,7 +352,7 @@
       (let ((case-fold-search t))
         (when (re-search-forward "^#\\+date:[ \t]*.*$" nil t)
           (replace-match
-           (concat "#+date: " (format-time-string "[%Y-%m-%d %a]"))
+           (concat "#+date: " (format-time-string "[%Y-%m-%d %a %H:%M]"))
            t t)))))
 
   (defun my/org-enable-update-date ()
