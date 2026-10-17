@@ -6,7 +6,8 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(add-to-list 'default-frame-alist '(width . 102))
+(add-to-list 'default-frame-alist '(width . 105))
+(add-to-list 'default-frame-alist '(height . 60))
 
 (define-advice display-warning
     (:around (orig-fun type &rest args) silence-missing-lexical-binding-cookie)
