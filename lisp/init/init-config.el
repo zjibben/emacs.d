@@ -308,6 +308,7 @@
                                         (todo)
                                         (not (parent (todo)))
                                         (outline-path "Download")
+                                        (or (not (scheduled)) (scheduled :to today))
                                         )
                                   ((org-ql-block-header "Downloads")
                                    (org-super-agenda-groups '((:auto-parent t)))
