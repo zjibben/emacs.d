@@ -40,6 +40,16 @@
 ;; open shells in current window
 (add-to-list 'display-buffer-alist '("^\\*shell\\*$" . (display-buffer-same-window)))
 
+;; Interpret OSC escapes, including hyperlinks printed by tools such as yay.
+(with-eval-after-load 'ansi-osc
+  ;; Keep terminal colors instead of overriding them with the link face.
+  (button-type-put 'ansi-osc-hyperlink 'face nil))
+
+(add-hook 'shell-mode-hook
+          (lambda ()
+            (add-hook 'comint-output-filter-functions
+                      #'comint-osc-process-output nil t)))
+
 ;; ensure environment is consistent with login environment
 ;; see http://stackoverflow.com/a/6415812
 (when (or (daemonp) (display-graphic-p))
