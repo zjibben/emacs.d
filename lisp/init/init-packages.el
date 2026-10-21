@@ -209,8 +209,10 @@
 
 (use-package eglot
   :hook (c++-mode . eglot-ensure)
-  :config
-  (add-to-list 'eglot-ignored-server-capabilities :semanticTokensProvider))
+  :custom
+  (eglot-ignored-server-capabilities
+   '(:semanticTokensProvider
+     :inlayHintProvider)))
 
 (use-package clang-format
   :demand t
