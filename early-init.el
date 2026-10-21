@@ -12,6 +12,7 @@
 (define-advice display-warning
     (:around (orig-fun type &rest args) silence-missing-lexical-binding-cookie)
   "Silence warnings about missing lexical-binding cookies."
-  (if (memq 'missing-lexbind-cookie type)
+  (if (or (eq type 'missing-lexbind-cookie)
+          (and (listp type) (memq 'missing-lexbind-cookie type)))
       t
     (apply orig-fun type args)))
