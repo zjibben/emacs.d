@@ -27,3 +27,5 @@ recentf
 .aider*
 network-security.data
 *.bak
+.org-id-locations
+bookmarks.eld
