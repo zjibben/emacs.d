@@ -160,6 +160,15 @@
 ;;   ;;(add-hook 'eimp-mode-hook  #'eimp-fit-image-to-window)
 ;;   )
 
+(with-eval-after-load 'tramp
+  (advice-add
+   'tramp-local-environment-variable-p
+   :around
+   (lambda (orig arg)
+     (if (and (string-prefix-p "GIT_INDEX_FILE=" arg)
+              (string-match-p "index\\.magit\\." arg))
+         nil
+       (funcall orig arg)))))
 (use-package magit
   :bind ("C-c g" . magit-file-dispatch))
 
