@@ -212,6 +212,7 @@
                                   )
                     (org-ql-block '(and (path "personal.org")
                                         (todo)
+                                        (not (todo "ACCEPTABLE"))
                                         (not (parent (todo)))
                                         (not (tags "purchase"))
                                         (or (tags "active")
@@ -220,6 +221,14 @@
                                             (and (deadline auto) (not (scheduled)))
                                             (scheduled :to today)))
                                   ((org-ql-block-header "Active")
+                                   (org-super-agenda-groups '((:auto-parent t)))
+                                   ;;(org-super-agenda-keep-order t)
+                                   (org-agenda-sorting-strategy '(priority deadline-up scheduled-up))
+                                   )
+                                  )
+                    (org-ql-block '(and (path "personal.org")
+                                        (todo "ACCEPTABLE"))
+                                  ((org-ql-block-header "Acceptable")
                                    (org-super-agenda-groups '((:auto-parent t)))
                                    ;;(org-super-agenda-keep-order t)
                                    (org-agenda-sorting-strategy '(priority deadline-up scheduled-up))
@@ -318,9 +327,11 @@
                   )
 
                 ;; note DOING is ahead of TODO for sorting purposes
-                org-todo-keywords '((sequence "DOING(i!)" "TODO(t)" "WAITING(w!)"
+                org-todo-keywords '((sequence "DOING(i!)" "TODO(t)" "WAITING(w!)" "ACCEPTABLE(a!)"
                                               "|" "DONE(d!)" "CANCELED(x@)" "DELEGATED"))
-                org-todo-keyword-faces '(("DOING" . "yellow") ("WAITING" . "yellow"))
+                org-todo-keyword-faces '(("DOING" . "yellow")
+                                         ("WAITING" . "yellow")
+                                         ("ACCEPTABLE" . "yellow"))
                 org-capture-templates
                 '(("t" "Todo without context" entry
                    (file+headline "~/sync/docs/org/inbox.org" "Tasks")
