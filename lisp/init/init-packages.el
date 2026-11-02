@@ -129,9 +129,12 @@
 (use-package auctex
   :config
   (setq         TeX-auto-save   t
-                TeX-parse-self  t)
+                TeX-parse-self  t
+                TeX-view-program-selection '((output-pdf "pdf-tools"))
+                TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
   (setq-default TeX-master      nil
                 TeX-engine     'xetex)
+  (setq-mode-default 'LaTeX-mode fill-column 80)
   (add-hook 'LaTeX-mode-hook #'flyspell-mode)    ; auto spell-checking in latex
   (add-hook 'LaTeX-mode-hook #'prettify-symbols-mode)
   (add-hook 'LaTeX-mode-hook (lambda () (add-all-to-list 'prettify-symbols-alist
@@ -141,8 +144,6 @@
                                                          '("\\left(" . ?\())))
   ;; is there a way to make C-e go to the actual end of the line in visual-line-mode??
   ;;(add-hook 'LaTeX-mode-hook #'visual-line-mode) ; break lines between words
-  (setq TeX-view-program-selection '((output-pdf "pdf-tools")))
-  (setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
   )
 
 (use-package pdf-tools
