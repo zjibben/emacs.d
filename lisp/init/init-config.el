@@ -394,8 +394,7 @@
                  '(".h$" . c++-mode)
                  '(".tpp$" . c++-mode)
                  '(".cl$" . c-mode)
-                 '(".m$" . octave-mode)
-                 '(".pdf$" . pdf-view-mode))
+                 '(".m$" . octave-mode))
 
 ;; keybindings
 ;; note: can put these all into a minor mode to group them together and deactivate easily,

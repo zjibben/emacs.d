@@ -146,12 +146,17 @@
   ;;(add-hook 'LaTeX-mode-hook #'visual-line-mode) ; break lines between words
   )
 
-(use-package pdf-tools
-  :mode ("\\.pdf\\'" . pdf-view-mode)
+(use-package emureader
+  :hook
+  (emureader-mode . my/emureader-setup)
+
   :config
-  (pdf-tools-install t nil t)
-  (add-hook 'pdf-view-mode-hook #'pdf-tools-enable-minor-modes)
-  (add-hook 'pdf-view-mode-hook #'auto-revert-mode))
+  (defun my/emureader-setup ()
+    (setq-local cursor-type nil)
+    ;; (when (and buffer-file-name
+    ;;            (string-match-p "\\.epub\\'" buffer-file-name))
+    ;;   (emureader-dark-mode 1))
+    ))
 
 ;; (use-package eimp
 ;;   :hook ((image-mode . eimp-mode)
