@@ -140,6 +140,7 @@
                 '(("w" "Work Agenda"
                    ((org-ql-block '(and (path "work.org")
                                         (todo)
+                                        (not (todo "ACCEPTABLE"))
                                         (not (parent (todo)))
                                         (or (tags "priority")
                                             (deadline 2)
@@ -155,6 +156,7 @@
                                   )
                     (org-ql-block '(and (path "work.org")
                                         (todo)
+                                        (not (todo "ACCEPTABLE"))
                                         (not (parent (todo)))
                                         (or (tags "active")
                                             (and (priority >= "B")
@@ -200,6 +202,7 @@
                   ("pa" "Personal Agenda"
                    ((org-ql-block '(and (path "personal.org")
                                         (todo)
+                                        (not (todo "ACCEPTABLE"))
                                         (not (parent (todo)))
                                         (or (tags "priority")
                                             (deadline 2)
@@ -230,14 +233,6 @@
                                    )
                                   )
                     (org-ql-block '(and (path "personal.org")
-                                        (todo "ACCEPTABLE"))
-                                  ((org-ql-block-header "Acceptable")
-                                   (org-super-agenda-groups '((:auto-parent t)))
-                                   ;;(org-super-agenda-keep-order t)
-                                   (org-agenda-sorting-strategy '(priority deadline-up scheduled-up))
-                                   )
-                                  )
-                    (org-ql-block '(and (path "personal.org")
                                         (todo)
                                         (not (todo "DOING"))
                                         (not (todo "ACCEPTABLE"))
@@ -249,6 +244,14 @@
                                   ((org-ql-block-header "Backlog")
                                    (org-super-agenda-groups '((:auto-parent t)))
                                    ))
+                    (org-ql-block '(and (path "personal.org")
+                                        (todo "ACCEPTABLE"))
+                                  ((org-ql-block-header "Acceptable")
+                                   (org-super-agenda-groups '((:auto-parent t)))
+                                   ;;(org-super-agenda-keep-order t)
+                                   (org-agenda-sorting-strategy '(priority deadline-up scheduled-up))
+                                   )
+                                  )
                     )
                    )
                   ("pw" "Personal Week Summary"
@@ -278,7 +281,7 @@
                                         ;(not (parent (todo)))
                                         (not (children (todo "DOING")))
                                         (not (outline-path "Download"))
-                                        (or (todo "DOING")
+                                        (or (todo "DOING" "PAUSED")
                                             (tags "active")))
                                   ((org-ql-block-header "Started")
                                    (org-super-agenda-groups '((:auto-parent t)))))
@@ -296,7 +299,7 @@
                                         (todo)
                                         (not (parent (todo)))
                                         (not (outline-path "Download"))
-                                        (not (todo "DOING"))
+                                        (not (todo "DOING" "PAUSED"))
                                         (not (priority >= "B"))
                                         (not (scheduled))
                                         )
@@ -331,11 +334,15 @@
                   )
 
                 ;; note DOING is ahead of TODO for sorting purposes
-                org-todo-keywords '((sequence "DOING(i!)" "TODO(t)" "WAITING(w!)" "ACCEPTABLE(a!)"
-                                              "|" "DONE(d!)" "CANCELED(x@)" "DELEGATED"))
+                org-todo-keywords '((sequence "DOING(i!)" "TODO(t)" "WAITING(w!)" "PAUSED(p!)"
+                                              "|"
+                                              "DONE(d!)" "ACCEPTABLE(a!)"
+                                              "CANCELED(x@)" "DELEGATED"))
                 org-todo-keyword-faces '(("DOING" . "yellow")
                                          ("WAITING" . "yellow")
-                                         ("ACCEPTABLE" . "yellow"))
+                                         ("PAUSED" . "yellow")
+                                         ;;("ACCEPTABLE" . "yellow")
+                                         )
                 org-capture-templates
                 '(("t" "Todo without context" entry
                    (file+headline "~/sync/docs/org/inbox.org" "Tasks")
